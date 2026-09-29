@@ -1,0 +1,40 @@
+{
+  "status": "bozza",
+  "metaTitle": "Studio Avvocati Zappalà | Official website",
+  "metaDescription": "Official website of Studio Avvocati Zappalà: legal counsel in civil, commercial and corporate law. The firm's people, areas of expertise and contact details.",
+  "hero": {
+    "statement": "Legal counsel in civil, commercial and corporate law."
+  },
+  "firm": {
+    "statement": "[Institutional text to be written: the firm's identity and approach.]",
+    "linkLabel": "The firm"
+  },
+  "expertise": {
+    "title": "Expertise",
+    "statement": "[Overview of the firm's areas of work to be written.]",
+    "items": [
+      {
+        "title": "Civil law",
+        "text": "[Summary to be written.]"
+      },
+      {
+        "title": "Commercial law",
+        "text": "[Summary to be written.]"
+      },
+      {
+        "title": "Corporate law",
+        "text": "[Summary to be written.]"
+      }
+    ],
+    "linkLabel": "All areas of expertise"
+  },
+  "people": {
+    "title": "People",
+    "intro": "The people of the firm.",
+    "allLabel": "All people"
+  },
+  "closing": {
+    "statement": "To get in touch with the firm, please see the official contact details.",
+    "linkLabel": "Contact"
+  }
+}

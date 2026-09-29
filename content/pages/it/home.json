@@ -1,0 +1,40 @@
+{
+  "status": "bozza",
+  "metaTitle": "Studio Avvocati Zappalà | Sito ufficiale",
+  "metaDescription": "Sito ufficiale di Studio Avvocati Zappalà: assistenza legale in materia civile, commerciale e aziendale. Le persone, le competenze e i recapiti dello studio.",
+  "hero": {
+    "statement": "Assistenza legale in materia civile, commerciale e aziendale."
+  },
+  "firm": {
+    "statement": "[Testo istituzionale da redigere: identità e approccio dello studio.]",
+    "linkLabel": "Lo studio"
+  },
+  "expertise": {
+    "title": "Competenze",
+    "statement": "[Presentazione delle attività dello studio da redigere.]",
+    "items": [
+      {
+        "title": "Diritto civile",
+        "text": "[Sintesi da redigere.]"
+      },
+      {
+        "title": "Diritto commerciale",
+        "text": "[Sintesi da redigere.]"
+      },
+      {
+        "title": "Diritto aziendale",
+        "text": "[Sintesi da redigere.]"
+      }
+    ],
+    "linkLabel": "Tutte le competenze"
+  },
+  "people": {
+    "title": "Le persone",
+    "intro": "Le persone dello studio.",
+    "allLabel": "Tutte le persone"
+  },
+  "closing": {
+    "statement": "Per contattare lo studio, consulta i recapiti ufficiali.",
+    "linkLabel": "Contatti"
+  }
+}

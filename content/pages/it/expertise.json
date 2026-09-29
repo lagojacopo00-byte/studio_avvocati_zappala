@@ -1,0 +1,24 @@
+{
+  "status": "placeholder",
+  "metaTitle": "Competenze | Studio Avvocati Zappalà",
+  "metaDescription": "Le competenze di Studio Avvocati Zappalà: diritto civile, commerciale e aziendale.",
+  "h1": "Competenze",
+  "lead": "[Introduzione alle attività dello studio da redigere.]",
+  "items": [
+    {
+      "id": "diritto-civile",
+      "title": "Diritto civile",
+      "summary": "[Sintesi da redigere.]"
+    },
+    {
+      "id": "diritto-commerciale",
+      "title": "Diritto commerciale",
+      "summary": "[Sintesi da redigere.]"
+    },
+    {
+      "id": "diritto-aziendale",
+      "title": "Diritto aziendale",
+      "summary": "[Sintesi da redigere.]"
+    }
+  ]
+}

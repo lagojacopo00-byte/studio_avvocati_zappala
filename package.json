@@ -1,0 +1,39 @@
+{
+  "name": "studio-avvocati-zappala",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Sito vetrina istituzionale di Studio Avvocati Zappalà (IT/EN)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "node scripts/check-content.mjs && next build",
+    "build:production": "SITE_ENV=production node scripts/check-content.mjs --production && SITE_ENV=production next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "verify": "node scripts/verify.mjs",
+    "check": "npm run typecheck && npm run lint && npm run build && npm run verify"
+  },
+  "engines": {
+    "node": ">=20.9"
+  },
+  "dependencies": {
+    "next": "^16.3.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/source-sans-3": "^5.3.0",
+    "@types/node": "^22.20.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.7",
+    "node-html-parser": "^9.0.4",
+    "playwright-core": "^1.56.1",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "status": "placeholder",
+  "metaTitle": "Expertise | Studio Avvocati Zappalà",
+  "metaDescription": "The areas of expertise of Studio Avvocati Zappalà: civil, commercial and corporate law.",
+  "h1": "Expertise",
+  "lead": "[Introduction to the firm's areas of work to be written.]",
+  "items": [
+    {
+      "id": "diritto-civile",
+      "title": "Civil law",
+      "summary": "[Summary to be written.]"
+    },
+    {
+      "id": "diritto-commerciale",
+      "title": "Commercial law",
+      "summary": "[Summary to be written.]"
+    },
+    {
+      "id": "diritto-aziendale",
+      "title": "Corporate law",
+      "summary": "[Summary to be written.]"
+    }
+  ]
+}
