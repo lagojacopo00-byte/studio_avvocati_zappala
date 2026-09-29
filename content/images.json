@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "id": "sant-agnese-facciata",
+    "file": "sant-agnese-facciata.jpg",
+    "subject": "Sant'Agnese in Agone: facciata (Borromini)",
+    "author": "Jebulon",
+    "source": "https://commons.wikimedia.org/wiki/File:Sant%27Agnese_in_Agone_facade,_Rome,_Italy.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e5/Sant%27Agnese_in_Agone_facade%2C_Rome%2C_Italy.jpg",
+    "license": "CC0",
+    "credit": "Jebulon / Wikimedia Commons / CC0",
+    "verifiedOn": "2026-09-29",
+    "width": 3014,
+    "height": 4736,
+    "alt": {
+      "it": "Facciata della chiesa di Sant'Agnese in Agone in piazza Navona",
+      "en": "Façade of the church of Sant'Agnese in Agone in Piazza Navona"
+    },
+    "focal": [
+      0.5,
+      0.35
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "pantheon-cassettoni",
+    "file": "pantheon-cassettoni.jpg",
+    "subject": "Pantheon: cassettoni della cupola e oculo",
+    "author": "Wilfredor",
+    "source": "https://commons.wikimedia.org/wiki/File:Pantheon_(Rome),_Dome_interior.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Pantheon_%28Rome%29%2C_Dome_interior.jpg",
+    "license": "CC0",
+    "credit": "Wilfredor / Wikimedia Commons / CC0",
+    "verifiedOn": "2026-09-29",
+    "width": 5698,
+    "height": 4875,
+    "alt": {
+      "it": "Cassettoni della cupola del Pantheon e apertura centrale",
+      "en": "Coffers of the Pantheon dome and its central oculus"
+    },
+    "focal": [
+      0.5,
+      0.5
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "roma-cupole-skyline",
+    "file": "roma-cupole-skyline.jpg",
+    "subject": "Roma: tetti e cupole (Santi Ambrogio e Carlo al Corso)",
+    "author": "Anil Öztas",
+    "source": "https://commons.wikimedia.org/wiki/File:Rom_(IT),_Santi_Ambrogio_e_Carlo_--_2024_--_0654.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Rom_%28IT%29%2C_Santi_Ambrogio_e_Carlo_--_2024_--_0654.jpg",
+    "license": "CC BY 4.0",
+    "credit": "Anil Öztas / Wikimedia Commons / CC BY 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 5729,
+    "height": 3819,
+    "alt": {
+      "it": "Panorama dei tetti e delle cupole di Roma",
+      "en": "Panorama of the rooftops and domes of Rome"
+    },
+    "focal": [
+      0.65,
+      0.4
+    ],
+    "status": "candidata"
+  }
+]

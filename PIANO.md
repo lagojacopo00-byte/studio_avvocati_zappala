@@ -242,7 +242,7 @@ Già risolte ✅ (29 settembre 2026): fonte foto = archivi a licenza libera; sta
 Ancora da fare / confermare:
 
 1. **Accesso alle foto**: `upload.wikimedia.org` e `images.unsplash.com` rispondono; `commons.wikimedia.org` ha risposto “429 troppe richieste” (limite lato Wikimedia sull'IP condiviso del container, da riprovare) e `www.pexels.com` risponde 403 (protezione anti-bot). Per Pexels e per i casi bloccati le foto possono essere scaricate a mano dall'utente dalla short list.
-2. **Approvazione della short list di immagini** (§4.3) prima del download.
+2. **Approvazione della short list di immagini** (§4.3) prima del download: **pronta in `docs/shortlist-immagini.md`** (14 foto; da decidere se accettare le CC BY-SA).
 3. **Lingua principale e radice**: `/` porta a `/it/`? 🔶
 4. **Hosting**: export statico o runtime Next.js (§6)? Può essere deciso più avanti, insieme al dominio.
 5. **Dettagli della home** (§2–§3): scorrimento naturale al posto delle schermate forzate, quadratini di navigazione sì/no, menu a tutto schermo anche su desktop o voci in linea, rapporto dei ritratti 3:4 o 4:5, accento di colore oltre a blu e avorio. Ho proposto un default per ciascuno, marcato 🔶.

@@ -1,0 +1,244 @@
+[
+  {
+    "id": "sant-ivo-lanterna",
+    "file": "sant-ivo-lanterna.jpg",
+    "subject": "Sant'Ivo alla Sapienza: lanterna a spirale (Borromini)",
+    "author": "Wolfgang Moroder",
+    "source": "https://commons.wikimedia.org/wiki/File:Sant_Ivo_alla_Sapienza_lanterna_lato_Sud_Roma.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Sant_Ivo_alla_Sapienza_lanterna_lato_Sud_Roma.jpg",
+    "license": "CC BY-SA 3.0",
+    "credit": "Wolfgang Moroder / Wikimedia Commons / CC BY-SA 3.0",
+    "verifiedOn": "2026-09-29",
+    "width": 4500,
+    "height": 6004,
+    "alt": {
+      "it": "Lanterna a spirale della chiesa di Sant'Ivo alla Sapienza a Roma",
+      "en": "Spiral lantern of the church of Sant'Ivo alla Sapienza in Rome"
+    },
+    "focal": [
+      0.5,
+      0.3
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "sant-ivo-cupola-interna",
+    "file": "sant-ivo-cupola-interna.jpg",
+    "subject": "Sant'Ivo alla Sapienza: cupola vista dall'interno",
+    "author": "Livioandronico2013",
+    "source": "https://commons.wikimedia.org/wiki/File:Sant%27Ivo_alla_Sapienza_(Rome)_,_Dome.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/3/37/Sant%27Ivo_alla_Sapienza_%28Rome%29_%2C_Dome.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 3661,
+    "height": 5887,
+    "alt": {
+      "it": "Cupola interna di Sant'Ivo alla Sapienza, con la geometria a stella",
+      "en": "Interior of the dome of Sant'Ivo alla Sapienza, with its star-shaped geometry"
+    },
+    "focal": [
+      0.5,
+      0.5
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "san-carlo-cupola-ovale",
+    "file": "san-carlo-cupola-ovale.jpg",
+    "subject": "San Carlo alle Quattro Fontane: cupola ovale a cassettoni (Borromini)",
+    "author": "Livio Andronico (Livioandronico2013)",
+    "source": "https://commons.wikimedia.org/wiki/File:San_Carlo_alle_Quattro_Fontane_(Rome)_-_Dome_HDR.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5c/San_Carlo_alle_Quattro_Fontane_%28Rome%29_-_Dome_HDR.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livio Andronico (Livioandronico2013) / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 3162,
+    "height": 5374,
+    "alt": {
+      "it": "Cupola ovale a cassettoni di San Carlo alle Quattro Fontane a Roma",
+      "en": "Oval coffered dome of San Carlo alle Quattro Fontane in Rome"
+    },
+    "focal": [
+      0.5,
+      0.5
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "palazzo-spada-galleria",
+    "file": "palazzo-spada-galleria.jpg",
+    "subject": "Palazzo Spada: galleria prospettica (Borromini)",
+    "author": "Livioandronico2013",
+    "source": "https://commons.wikimedia.org/wiki/File:Forced_perspective_gallery_by_Francesco_Borromini.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Forced_perspective_gallery_by_Francesco_Borromini.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 5472,
+    "height": 3678,
+    "alt": {
+      "it": "Galleria prospettica a colonne di Palazzo Spada a Roma",
+      "en": "Colonnaded perspective gallery of Palazzo Spada in Rome"
+    },
+    "focal": [
+      0.5,
+      0.55
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "palazzo-barberini-scala",
+    "file": "palazzo-barberini-scala.jpg",
+    "subject": "Palazzo Barberini: scala elicoidale (Borromini)",
+    "author": "Livioandronico2013",
+    "source": "https://commons.wikimedia.org/wiki/File:Palazzo_Barberini_(Rome)_-_Borromini%27s_staircase.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Palazzo_Barberini_%28Rome%29_-_Borromini%27s_staircase.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 4936,
+    "height": 3856,
+    "alt": {
+      "it": "Scala elicoidale di Palazzo Barberini vista dal basso",
+      "en": "Helical staircase of Palazzo Barberini seen from below"
+    },
+    "focal": [
+      0.5,
+      0.5
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "palazzo-barberini-finestra",
+    "file": "palazzo-barberini-finestra.jpg",
+    "subject": "Palazzo Barberini: finestra ad arco",
+    "author": "Alvesgaspar",
+    "source": "https://commons.wikimedia.org/wiki/File:Palazzo_Barberini_May_2022-2.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/d/dc/Palazzo_Barberini_May_2022-2.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Alvesgaspar / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 3212,
+    "height": 5728,
+    "alt": {
+      "it": "Finestra ad arco di Palazzo Barberini con alberi sullo sfondo",
+      "en": "Arched window of Palazzo Barberini with trees in the background"
+    },
+    "focal": [
+      0.5,
+      0.4
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "sant-andrea-cupola",
+    "file": "sant-andrea-cupola.jpg",
+    "subject": "Sant'Andrea al Quirinale: cupola a cassettoni (Bernini)",
+    "author": "Livioandronico2013",
+    "source": "https://commons.wikimedia.org/wiki/File:Sant%27Andrea_al_Quirinale_-_Dome.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/1/17/Sant%27Andrea_al_Quirinale_-_Dome.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 5873,
+    "height": 3829,
+    "alt": {
+      "it": "Cupola a cassettoni dorati di Sant'Andrea al Quirinale",
+      "en": "Gilded coffered dome of Sant'Andrea al Quirinale"
+    },
+    "focal": [
+      0.5,
+      0.5
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "sant-agnese-cupola-interna",
+    "file": "sant-agnese-cupola-interna.jpg",
+    "subject": "Sant'Agnese in Agone: cupola vista dall'interno",
+    "author": "Livioandronico2013",
+    "source": "https://commons.wikimedia.org/wiki/File:Sant%27Agnese_in_Agone_(Rome)_-_Dome.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/4/40/Sant%27Agnese_in_Agone_%28Rome%29_-_Dome.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 3844,
+    "height": 3953,
+    "alt": {
+      "it": "Cupola interna di Sant'Agnese in Agone con affreschi",
+      "en": "Interior of the dome of Sant'Agnese in Agone with frescoes"
+    },
+    "focal": [
+      0.5,
+      0.5
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "san-carlo-chiostro",
+    "file": "san-carlo-chiostro.jpg",
+    "subject": "San Carlo alle Quattro Fontane: chiostro (Borromini)",
+    "author": "Livioandronico2013",
+    "source": "https://commons.wikimedia.org/wiki/File:San_Carlo_alle_Quattro_Fontane_(Rome)_-_Cloister.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/8/83/San_Carlo_alle_Quattro_Fontane_%28Rome%29_-_Cloister.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 3328,
+    "height": 4760,
+    "alt": {
+      "it": "Chiostro porticato di San Carlo alle Quattro Fontane con il pozzo",
+      "en": "Arcaded cloister of San Carlo alle Quattro Fontane with the well"
+    },
+    "focal": [
+      0.4,
+      0.5
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "cancelleria-facciata",
+    "file": "cancelleria-facciata.jpg",
+    "subject": "Palazzo della Cancelleria: facciata",
+    "author": "Livioandronico2013",
+    "source": "https://commons.wikimedia.org/wiki/File:Palazzo_della_Cancelleria.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Palazzo_della_Cancelleria.jpg",
+    "license": "CC BY-SA 4.0",
+    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
+    "verifiedOn": "2026-09-29",
+    "width": 3562,
+    "height": 3518,
+    "alt": {
+      "it": "Facciata rinascimentale del Palazzo della Cancelleria",
+      "en": "Renaissance façade of the Palazzo della Cancelleria"
+    },
+    "focal": [
+      0.5,
+      0.4
+    ],
+    "status": "candidata"
+  },
+  {
+    "id": "palazzo-farnese-facciata",
+    "file": "palazzo-farnese-facciata.jpg",
+    "subject": "Palazzo Farnese: facciata",
+    "author": "Myrabella",
+    "source": "https://commons.wikimedia.org/wiki/File:Palais_Farnese.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Palais_Farnese.jpg",
+    "license": "CC BY-SA 3.0",
+    "credit": "Myrabella / Wikimedia Commons / CC BY-SA 3.0",
+    "verifiedOn": "2026-09-29",
+    "width": 3263,
+    "height": 2447,
+    "alt": {
+      "it": "Facciata di Palazzo Farnese a Roma",
+      "en": "Façade of Palazzo Farnese in Rome"
+    },
+    "focal": [
+      0.5,
+      0.35
+    ],
+    "status": "candidata"
+  }
+]
