@@ -1,0 +1,212 @@
+# PIANO — Sito Studio Avvocati Zappalà
+
+Versione 0.1 · 29 settembre 2026 · Piano di realizzazione, da eseguire in una seconda fase (coding con loop engineering).
+Documenti di riferimento: `PRD.md` (prodotto e direzione artistica) e `code.md` (specifica tecnica). Questo piano non li sostituisce: li traduce in fasi, task e verifiche.
+
+Stato: **bozza con assunzioni esplicite**. Le assunzioni sono marcate con 🔶 e vanno confermate nella sezione 11.
+
+---
+
+## 1. Cosa stiamo costruendo
+
+Un sito vetrina istituzionale, bilingue (IT/EN), che diventi la fonte ufficiale per chi cerca lo studio o i suoi avvocati. Niente moduli, prenotazioni o funnel. La **home** segue l'impostazione del sito di riferimento (wrmgroup.net): hero fotografico a tutta larghezza, titoli serif grandi, sezioni distinte, alternanza di superfici scure e chiare, **team in primo piano**. Composizione, testi e immagini restano originali.
+
+Priorità dichiarate dall'utente: home sul modello WRM · architetture eleganti di Roma (no Colosseo) · **grande importanza al team** (foto in arrivo).
+
+## 2. Limite noto: il riferimento non è stato visto direttamente
+
+In questa sessione il dominio `wrmgroup.net` è bloccato dalla rete del container. La struttura della home qui sotto deriva dalle osservazioni già nel PRD §3 (titoli serif grandi, logo in alto a sinistra, menu compatto a destra, superfici scure, immagini a fianco dei messaggi, sezione team con nomi/ruoli/profili), non da un'ispezione completa.
+
+Prima del coding serve una di queste due cose (vedi §11): sbloccare il dominio nelle impostazioni dell'ambiente, oppure fornire screenshot della home e della pagina team (desktop e mobile).
+
+## 3. Home: struttura proposta
+
+Mappatura dal riferimento a Studio Zappalà. Ogni blocco ha larghezza di lettura controllata e nessuno scroll forzato.
+
+| # | Blocco | Superficie | Contenuto | Note |
+|---|---|---|---|---|
+| 1 | Header | trasparente su hero → blu notte allo scroll | Marchio testuale “Studio Avvocati Zappalà” a sinistra; nav compatta a destra: Lo studio · Competenze · Persone · Contatti · IT/EN | Menu mobile accessibile (code.md §6) |
+| 2 | Hero | foto architettonica a tutta altezza, velo blu notte | H1 serif grande, una frase introduttiva, link sobrio a “Lo studio” | Nessun pulsante commerciale, nessun claim o numero inventato |
+| 3 | Lo studio | avorio | 80–120 parole in serif grande, link “Scopri lo studio” | Testo da redigere dopo chiarimento servizi |
+| 4 | Competenze | blu notte | Righe editoriali: diritto civile · commerciale · aziendale (+ family office solo se confermato) | Ogni riga con immagine architettonica di dettaglio |
+| 5 | Intermezzo fotografico | foto a tutta larghezza | Una riga di testo, nessuna call to action | Ritmo fotografico come nel riferimento |
+| 6 | **Persone** | avorio | Titolo grande + griglia di ritratti 4:5, nome e ruolo sempre visibili, link a ogni profilo, “Tutte le persone” | **Blocco più importante della home** (vedi §5) |
+| 7 | Chiusura istituzionale | blu notte | Approccio in una frase + recapiti discreti o sede | Nessun funnel |
+| 8 | Footer | blu notte | Denominazione, sedi, recapiti, informative, selettore lingua | Solo dati confermati |
+
+Pagine collegate (URL da code.md §3): `/it/studio/`, `/it/competenze/`, `/it/persone/`, `/it/persone/{slug}/`, `/it/contatti/`, 404, informative; gli equivalenti `/en/…`. Family office e dettagli di competenza solo se approvati.
+
+## 4. Fotografie di architettura
+
+### 4.1 Non da Google Immagini
+
+Non posso prendere le foto da Google Immagini, e sconsiglio di farlo anche a mano:
+
+- i risultati di Google **non sono licenziati**: quasi tutte le foto sono protette dal diritto d'autore. Per uno studio legale un contenzioso per uso non autorizzato di immagini è un danno di reputazione;
+- il PRD lo vieta già: A08 “nessuna immagine senza autorizzazione”, e il modello dei contenuti richiede per ogni immagine autore, licenza e credito;
+- in questo container Google e i principali archivi sono comunque bloccati dalla rete.
+
+### 4.2 Alternative proposte 🔶
+
+| Opzione | Costo | Pro | Contro |
+|---|---|---|---|
+| **A. Archivi a licenza libera** (Wikimedia Commons CC0/pubblico dominio o CC BY, Unsplash, Pexels) | 0 | Subito disponibili, licenza chiara per ogni file | Qualità variabile; CC BY richiede il credito; nessuna esclusiva; le foto possono comparire su altri siti |
+| **B. Stock a pagamento** (Adobe Stock, Getty, Alamy, ecc.) | basso–medio | Alta qualità, licenza commerciale chiara | Nessuna esclusiva |
+| **C. Fotografo a Roma** | medio–alto | Immagini uniche e coerenti con i ritratti del team, esclusiva | Tempi e budget |
+
+Raccomandazione: **A per sviluppare e lanciare la prima versione**, con un registro licenze (§4.4), e C come sostituzione futura se il budget lo consente. Il piano è costruito perché sostituire una foto sia solo cambiare un file e una riga del registro.
+
+Nota legale da verificare con il referente del cliente: in Italia la riproduzione a fini commerciali di beni culturali in consegna pubblica può richiedere autorizzazione o canoni (Codice dei beni culturali, artt. 107–108). Una licenza Creative Commons del fotografo non copre necessariamente questo aspetto. Da controllare prima del lancio, soprattutto per interni di edifici statali.
+
+### 4.3 Soggetti da cercare (Roma, elegante, non turistico)
+
+Nessun Colosseo, nessuna cartolina, niente folla. Preferire dettagli, scorci e luce naturale.
+
+- Sant'Ivo alla Sapienza: lanterna a spirale e cortile porticato (Borromini)
+- Sant'Andrea al Quirinale: cupola e ovale interno (Bernini)
+- Palazzo Spada: galleria prospettica (Borromini)
+- Scala elicoidale di Palazzo Barberini (Borromini)
+- Cortile di Palazzo Farnese e cortile della Cancelleria
+- Piazza del Campidoglio: pavimentazione e facciate (Michelangelo)
+- Tempietto di San Pietro in Montorio (Bramante)
+- Loggia di Villa Farnesina
+- Portico di Palazzo Massimo alle Colonne
+- Cupola di Sant'Agnese in Agone; lanterne e tamburi in genere
+- Pantheon: solo dettagli (cassettoni, cornici), niente inquadrature da cartolina
+
+Servono immagini con spazio libero per il testo, saturazione contenuta e formato orizzontale ampio (min. 2400 px sul lato lungo) per l'hero, oltre a ritagli verticali per mobile.
+
+### 4.4 Registro immagini
+
+File `content/images.json` (o equivalente) con, per ogni immagine: file, soggetto, autore, fonte (URL), licenza, credito richiesto, data di verifica, dimensioni, testo alternativo, punto focale IT/EN, stato (`candidata` / `approvata`). Il build **fallisce** se una pagina pubblica usa un'immagine non `approvata`.
+
+Processo: io preparo una **short list con URL e licenza esatti**; tu approvi; solo allora vengono scaricate. Serve accesso di rete ai domini scelti (§11).
+
+## 5. Il team come elemento centrale
+
+### 5.1 Dove compare
+
+- **Home §6**: griglia grande di ritratti, non un carosello. Andrea Zappalà è il primo nominativo confermato; l'ordine degli altri segue il campo `ordine`.
+- **Pagina Persone**: tutto l'organico pubblico, stessa griglia. Filtri solo se il numero di persone lo giustifica (code.md §6).
+- **Profilo nominativo** per ogni avvocato: ritratto 4:5 a sinistra (sticky su desktop), biografia a destra, ruolo, attività seguite, lingue e qualifiche solo se documentate, collegamenti a studio e competenze, recapiti solo se autorizzati.
+
+### 5.2 Predisposto per l'arrivo delle foto
+
+- Una cartella per persona e un file dati per lingua: `content/people/{slug}/it.md`, `en.md`, più `foto.jpg` in ingresso. Aggiungere una persona = aggiungere una cartella.
+- La griglia si adatta a qualsiasi numero (da 1 a molte decine) senza modifiche al codice: 1 colonna su mobile, 2 su tablet, 3 su desktop (base di lavoro, code.md §5).
+- **Pipeline foto**: dall'originale genera AVIF/WebP/JPEG a più larghezze, ritaglio 4:5 con punto focale configurabile, trattamento cromatico uniforme (desaturato, bianco e nero come alternativa da validare) applicato al build, così foto scattate in momenti diversi risultano coerenti.
+- **Placeholder** chiari e uniformi: riquadro 4:5 in tonalità pietra con la dicitura “Foto in arrivo”, stato `placeholder`. Nessun volto sintetico, nessun nome fittizio.
+- **Guardia di pubblicazione**: in produzione il build fallisce se una pagina pubblicata contiene ancora un placeholder, un testo segnaposto o un contenuto non `pubblicabile` (criterio A08). Le anteprime sono `noindex` **e** protette da accesso (noindex non è riservatezza, code.md §7).
+
+### 5.3 Indicazioni per lo shooting dei ritratti 🔶
+
+Utili se si vuole risparmiare lavoro di ritocco: stesso fondo e stessa luce per tutti, mezzo busto, stessa distanza e altezza dell'obiettivo, spazio sopra la testa per il ritaglio 4:5, file originali ad alta risoluzione (almeno 1600×2000 px), consenso alla pubblicazione per ciascuna persona.
+
+## 6. Stack e architettura 🔶
+
+`code.md` lascia lo stack aperto. Raccomandazione:
+
+- **Astro** (generazione statica, routing i18n integrato, content collections per persone/pagine, ottimizzazione immagini, JavaScript solo dove serve). Coerente con: contenuti nell'HTML, nessun database, nessun endpoint, hreflang e sitemap gestibili in modo deterministico.
+- **Contenuti**: Markdown + dati strutturati nel repository, separati dai componenti. Nessun CMS nella v1; se il cliente vorrà aggiornare in autonomia, si aggiunge poi un CMS git-based senza cambiare i componenti.
+- **Stile**: CSS con token centralizzati (palette `#101F33` `#30465D` `#F5F3EF` `#E3DFD8` `#202832` `#FFFFFF`), nessun framework UI pesante.
+- **Font**: una serif per i titoli e una sans per il corpo, con licenza verificata (candidati con licenza aperta da scegliere in fase di design), fallback di sistema, pochi pesi.
+- **Hosting**: sito statico su un servizio di hosting statico; da decidere insieme al dominio. Nessun servizio di backend.
+- **Fuori perimetro** (code.md §2): database, e-mail, moduli, calendario, CRM, account utente. Non installarli.
+
+Le versioni esatte delle dipendenze si verificano al momento del coding.
+
+## 7. Design system (sintesi)
+
+Riprende `PRD.md` §7 e `code.md` §5. Punti chiave da rendere token/componenti:
+
+- Colori: alternanza misurata di blu notte e avorio; niente blu elettrico, oro dominante o gradienti vistosi; contrasto verificato per testo, link, hover e focus (pietra mai come testo secondario su avorio).
+- Tipografia: corpo 17–18 px, interlinea 1,55–1,7; H1 fluido circa 36–72 px; colonna di lettura controllata.
+- Layout: contenitore max ~1280 px; margini 24 px mobile, 48–80 px desktop; spaziatura verticale 56–80 px mobile, 96–144 px desktop.
+- Movimento: transizioni 150–250 ms; eventuali comparse 300–500 ms con contenuto visibile anche senza JavaScript; `prefers-reduced-motion` rispettato; niente parallax forzato, video automatico, cursore personalizzato o carosello.
+- Componenti: Header/menu mobile, Hero, Sezione editoriale, Riga competenza, Card persona, Griglia persone, Profilo, Blocco contatti, Footer, Selettore lingua, Immagine responsive con credito.
+
+## 8. SEO e contenuti (sintesi operativa)
+
+Da `code.md` §7, come task verificabili nel build:
+
+- canonical autoreferenziale per pagina e lingua; hreflang reciproci (+ `x-default` deciso con la radice); attributo `lang` coerente;
+- sitemap con soli URL pubblicabili; `robots` diverso per anteprima e produzione;
+- titoli univoci (home “Studio Avvocati Zappalà | Sito ufficiale”, profilo “Andrea Zappalà | Studio Avvocati Zappalà”) e descrizioni editoriali;
+- H1 con il nome della persona sui profili; link HTML da Persone a ogni profilo e dai profili allo studio (nessuna pagina orfana);
+- dati strutturati per studio e persone, solo con relazioni verificate e dati visibili in pagina; niente recensioni, premi o qualifiche inventati;
+- 404 con stato HTTP corretto; censimento dei vecchi URL prima di qualsiasi redirect;
+- Search Console e baseline delle ricerche nominative solo quando dominio e titolarità saranno disponibili.
+
+Nessuna promessa di posizionamento né di rimozione di risultati esterni.
+
+## 9. Fasi e task (pensati per loop engineering)
+
+Ogni task ha una **condizione di completamento verificabile da macchina**, così il loop può ripetersi finché la verifica non passa. Gli strumenti di verifica sono una proposta.
+
+### Fase 0 — Decisioni e materiali (prima del coding)
+- Risposte alle domande del §11; sblocco rete o screenshot del riferimento.
+- Short list immagini approvata (§4.3) e registro licenze avviato.
+- Aggiornamento di `PRD.md` e `code.md` alla v0.3 con le scelte prese (stack, fonte immagini, lingua principale).
+- **Fatto quando**: decisioni registrate nei documenti, short list approvata.
+
+### Fase 1 — Fondamenta
+1. Scaffold del progetto, struttura cartelle, script di build e controllo.
+2. Token di design, font, stile di base, layout con header/footer.
+3. Routing IT/EN, selettore lingua che apre la pagina equivalente, redirect della radice.
+4. Schema dei contenuti (Studio, Persona, Competenza, Immagine, Pagina, Configurazione) con validazione: i campi obbligatori mancanti fanno fallire il build.
+5. Pipeline immagini e registro licenze.
+- **Fatto quando**: `build` passa; una pagina di prova IT/EN si genera con hreflang e canonical corretti.
+
+### Fase 2 — Pagine con contenuti segnaposto
+1. Home (blocchi §3), con immagini candidate.
+2. Lo studio, Competenze, Contatti (senza modulo), 404, informative segnaposto.
+3. Persone (griglia) e profilo nominativo con **almeno 3 persone di prova** in placeholder, incluso Andrea Zappalà con nome reale.
+4. Menu mobile, focus, salto al contenuto.
+- **Fatto quando**: tutte le pagine IT/EN si generano; screenshot automatici a 320, 390, 768, 1280 e 1440 px senza overflow orizzontale né elementi tagliati.
+
+### Fase 3 — Qualità
+1. Controlli automatici: link interni, canonical/hreflang reciproci, sitemap, titoli univoci, un solo H1, `robots` per ambiente.
+2. Accessibilità: scansione automatica (es. axe) + verifica manuale di tastiera, zoom 200%, movimento ridotto.
+3. Prestazioni: budget immagini (hero mobile ~300 KB, ritratto ~120 KB) e obiettivi LCP ≤ 2,5 s, CLS ≤ 0,1, INP ≤ 200 ms in laboratorio.
+4. Guardia di pubblicazione (§5.2) e anteprima protetta.
+- **Fatto quando**: tutti i controlli passano; i risultati sono salvati come report nel repo. Nessun punteggio automatico viene presentato come “conformità WCAG”.
+
+### Fase 4 — Contenuti reali
+1. Inserimento di organico, ruoli, biografie, foto (arrivo previsto più avanti) e traduzioni revisionate.
+2. Testi di studio e competenze dopo il chiarimento del family office e delle sedi.
+3. Sostituzione immagini con le versioni approvate; verifica diritti e crediti.
+- **Fatto quando**: nessun placeholder rimasto; ogni profilo ha bio, ruolo, ritratto autorizzato e traduzione equivalente (A02, A03, A08).
+
+### Fase 5 — Lancio
+- Dominio, hosting, informative reali, dati strutturati finali, sitemap, Search Console, baseline ricerche nominative.
+- **Fatto quando**: criteri A01–A10 del PRD verificati uno per uno.
+
+## 10. Rischi
+
+| Rischio | Effetto | Mitigazione |
+|---|---|---|
+| Riferimento non ispezionato | Home diversa dall'aspettativa | Screenshot o sblocco dominio prima della Fase 2 |
+| Immagini senza licenza | Contestazioni, violazione di A08 | Registro licenze, build che blocca, short list approvata |
+| Foto del team in ritardo o disomogenee | Lancio bloccato o sito poco coerente | Placeholder e pipeline di uniformazione, brief di shooting |
+| Family office e servizi non definiti | Testi e menu incerti | Voce condizionata; testi dopo chiarimento |
+| Placeholder indicizzati | SEO e reputazione | Guardia di pubblicazione, `noindex` + accesso protetto |
+| Omonimi e risultati di terzi | Baseline SEO fuorviante | Baseline con distinzione dei risultati, nessuna attribuzione affrettata |
+| Sede a Roma solo ipotizzata | Dati errati nel footer e nei dati strutturati | Roma resta riferimento visivo finché non confermata |
+
+## 11. Domande aperte
+
+Bloccanti o quasi per partire:
+
+1. **Riferimento WRM**: sblocco del dominio nelle impostazioni dell'ambiente oppure screenshot (home e team, desktop e mobile)?
+2. **Fonte delle foto architettoniche**: opzione A, B o C del §4.2? Dispone già di foto proprie o di un fotografo?
+3. **Stack**: va bene Astro statico (§6)?
+4. **Chi aggiornerà i contenuti** dopo il lancio: sviluppatore o cliente in autonomia (decide se serve un CMS)?
+5. **Lingua principale e radice**: `/` porta a `/it/`? 🔶
+
+Da PRD §12, da raccogliere senza bloccare la Fase 1:
+
+6. Dominio ufficiale, eventuale vecchio sito e URL da conservare.
+7. Sedi reali e area servita; come descrivere il family office e cosa svolge lo studio.
+8. Organico, ruoli, ordine, biografie, autorizzazioni; responsabile della revisione inglese.
+9. Ritratti a colori o in bianco e nero; shooting.
+10. Logo (o conferma del marchio tipografico), referente approvazioni, budget e data di lancio, recapiti pubblici.
