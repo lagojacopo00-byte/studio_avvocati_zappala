@@ -1,9 +1,18 @@
 # PIANO — Sito Studio Avvocati Zappalà
 
-Versione 0.1 · 29 settembre 2026 · Piano di realizzazione, da eseguire in una seconda fase (coding con loop engineering).
+Versione 0.2 · 29 settembre 2026 · Piano di realizzazione, da eseguire in una seconda fase (coding con loop engineering).
 Documenti di riferimento: `PRD.md` (prodotto e direzione artistica) e `code.md` (specifica tecnica). Questo piano non li sostituisce: li traduce in fasi, task e verifiche.
 
-Stato: **bozza con assunzioni esplicite**. Le assunzioni sono marcate con 🔶 e vanno confermate nella sezione 11.
+Stato: **bozza con assunzioni esplicite**. Le assunzioni ancora da confermare sono marcate con 🔶 (sezione 11). Le scelte già prese dall'utente sono marcate con ✅.
+
+### Decisioni prese (29 settembre 2026)
+
+| Tema | Decisione |
+|---|---|
+| Fonte delle foto di architettura | ✅ Archivi a licenza libera (Wikimedia Commons, Unsplash, Pexels), con registro licenze; eventuale sostituzione futura con un fotografo |
+| Riferimento WRM | ✅ L'utente sbloccherà il dominio `wrmgroup.net` nelle impostazioni dell'ambiente (all'ultimo controllo era ancora bloccato) |
+| Stack | ✅ **Next.js** (scelta dell'utente; la bozza 0.1 raccomandava Astro, vedi §6 per le conseguenze) |
+| Aggiornamento contenuti | ✅ Uno sviluppatore, tramite file nel repository; nessun CMS nella v1 |
 
 ---
 
@@ -46,7 +55,7 @@ Non posso prendere le foto da Google Immagini, e sconsiglio di farlo anche a man
 - il PRD lo vieta già: A08 “nessuna immagine senza autorizzazione”, e il modello dei contenuti richiede per ogni immagine autore, licenza e credito;
 - in questo container Google e i principali archivi sono comunque bloccati dalla rete.
 
-### 4.2 Alternative proposte 🔶
+### 4.2 Alternative valutate (scelta: A ✅)
 
 | Opzione | Costo | Pro | Contro |
 |---|---|---|---|
@@ -54,7 +63,9 @@ Non posso prendere le foto da Google Immagini, e sconsiglio di farlo anche a man
 | **B. Stock a pagamento** (Adobe Stock, Getty, Alamy, ecc.) | basso–medio | Alta qualità, licenza commerciale chiara | Nessuna esclusiva |
 | **C. Fotografo a Roma** | medio–alto | Immagini uniche e coerenti con i ritratti del team, esclusiva | Tempi e budget |
 
-Raccomandazione: **A per sviluppare e lanciare la prima versione**, con un registro licenze (§4.4), e C come sostituzione futura se il budget lo consente. Il piano è costruito perché sostituire una foto sia solo cambiare un file e una riga del registro.
+Scelta: **A per sviluppare e lanciare la prima versione**, con un registro licenze (§4.4), e C come sostituzione futura se il budget lo consente. Il piano è costruito perché sostituire una foto sia solo cambiare un file e una riga del registro.
+
+Per le licenze: preferire CC0/pubblico dominio e licenze Unsplash/Pexels; usare CC BY solo con credito visibile in pagina; **escludere** CC BY-SA e CC BY-NC (obblighi di condivisione o divieto d'uso commerciale non adatti a un sito professionale).
 
 Nota legale da verificare con il referente del cliente: in Italia la riproduzione a fini commerciali di beni culturali in consegna pubblica può richiedere autorizzazione o canoni (Codice dei beni culturali, artt. 107–108). Una licenza Creative Commons del fotografo non copre necessariamente questo aspetto. Da controllare prima del lancio, soprattutto per interni di edifici statali.
 
@@ -102,15 +113,21 @@ Processo: io preparo una **short list con URL e licenza esatti**; tu approvi; so
 
 Utili se si vuole risparmiare lavoro di ritocco: stesso fondo e stessa luce per tutti, mezzo busto, stessa distanza e altezza dell'obiettivo, spazio sopra la testa per il ritaglio 4:5, file originali ad alta risoluzione (almeno 1600×2000 px), consenso alla pubblicazione per ciascuna persona.
 
-## 6. Stack e architettura 🔶
+## 6. Stack e architettura
 
-`code.md` lascia lo stack aperto. Raccomandazione:
+`code.md` lasciava lo stack aperto. Scelta dell'utente: **Next.js** ✅.
 
-- **Astro** (generazione statica, routing i18n integrato, content collections per persone/pagine, ottimizzazione immagini, JavaScript solo dove serve). Coerente con: contenuti nell'HTML, nessun database, nessun endpoint, hreflang e sitemap gestibili in modo deterministico.
-- **Contenuti**: Markdown + dati strutturati nel repository, separati dai componenti. Nessun CMS nella v1; se il cliente vorrà aggiornare in autonomia, si aggiunge poi un CMS git-based senza cambiare i componenti.
+- **Next.js (App Router), con tutte le pagine pre-generate al build** (`generateStaticParams` per `[lang]` e `[slug]`). Coerente con: contenuti presenti nell'HTML, nessun database, nessun endpoint, nessun modulo.
+- **Conseguenze da gestire** (Next.js è più pesante di un generatore statico puro):
+  - usare Server Component per tutto e Client Component solo dove serve (menu mobile, selettore lingua se richiede stato), per rispettare i budget di LCP e INP;
+  - routing i18n con segmento `/[lang]/` (il routing i18n integrato è del vecchio Pages Router): mappa esplicita tra gli slug IT e EN (`/studio` ↔ `/firm`, `/persone` ↔ `/people`, ecc.) e generazione di canonical/hreflang dalla stessa mappa;
+  - canonical e hreflang tramite l'API dei metadata; `sitemap` e `robots` tramite i file dedicati di Next.js, diversi per anteprima e produzione;
+  - redirect della radice `/` verso la lingua principale configurato a livello di framework/hosting, senza rilevare la lingua del browser;
+  - **decisione da prendere con l'hosting**: export completamente statico (`output: 'export'`, hosting statico qualsiasi, ma niente `next/image` ottimizzato a runtime né redirect/middleware lato server) oppure hosting con runtime Next.js (es. Vercel). In caso di export statico le immagini si elaborano con uno script `sharp` al build. Da verificare sulle versioni correnti al momento del coding.
+- **Contenuti**: Markdown/MDX + dati strutturati (JSON/YAML) nel repository, letti da un caricatore tipizzato con validazione dello schema (es. Zod), separati dai componenti. Nessun CMS nella v1 ✅; se il cliente vorrà aggiornare in autonomia si aggiunge poi un CMS basato su git senza cambiare i componenti.
 - **Stile**: CSS con token centralizzati (palette `#101F33` `#30465D` `#F5F3EF` `#E3DFD8` `#202832` `#FFFFFF`), nessun framework UI pesante.
 - **Font**: una serif per i titoli e una sans per il corpo, con licenza verificata (candidati con licenza aperta da scegliere in fase di design), fallback di sistema, pochi pesi.
-- **Hosting**: sito statico su un servizio di hosting statico; da decidere insieme al dominio. Nessun servizio di backend.
+- **Hosting**: da decidere insieme al dominio (vedi punto sull'export statico). Nessun servizio di backend.
 - **Fuori perimetro** (code.md §2): database, e-mail, moduli, calendario, CRM, account utente. Non installarli.
 
 Le versioni esatte delle dipendenze si verificano al momento del coding.
@@ -144,9 +161,10 @@ Nessuna promessa di posizionamento né di rimozione di risultati esterni.
 Ogni task ha una **condizione di completamento verificabile da macchina**, così il loop può ripetersi finché la verifica non passa. Gli strumenti di verifica sono una proposta.
 
 ### Fase 0 — Decisioni e materiali (prima del coding)
-- Risposte alle domande del §11; sblocco rete o screenshot del riferimento.
+- Risposte alle domande residue del §11; sblocco rete (o screenshot) del riferimento e dei domini foto.
+- Ispezione del riferimento WRM e aggiornamento del §3 sulla struttura reale.
 - Short list immagini approvata (§4.3) e registro licenze avviato.
-- Aggiornamento di `PRD.md` e `code.md` alla v0.3 con le scelte prese (stack, fonte immagini, lingua principale).
+- Aggiornamento di `PRD.md` e `code.md` alla v0.3 con le scelte prese (stack Next.js, fonte immagini, aggiornamenti via repository, lingua principale). Nota: il PRD v0.2 escludeva ogni acquisizione di immagini “in questa fase”: la v0.3 deve autorizzare esplicitamente la selezione e il download delle immagini approvate.
 - **Fatto quando**: decisioni registrate nei documenti, short list approvata.
 
 ### Fase 1 — Fondamenta
@@ -195,13 +213,14 @@ Ogni task ha una **condizione di completamento verificabile da macchina**, così
 
 ## 11. Domande aperte
 
-Bloccanti o quasi per partire:
+Già risolte ✅ (29 settembre 2026): fonte foto = archivi a licenza libera; stack = Next.js; aggiornamenti = sviluppatore via repository; riferimento WRM = l'utente sblocca il dominio.
 
-1. **Riferimento WRM**: sblocco del dominio nelle impostazioni dell'ambiente oppure screenshot (home e team, desktop e mobile)?
-2. **Fonte delle foto architettoniche**: opzione A, B o C del §4.2? Dispone già di foto proprie o di un fotografo?
-3. **Stack**: va bene Astro statico (§6)?
-4. **Chi aggiornerà i contenuti** dopo il lancio: sviluppatore o cliente in autonomia (decide se serve un CMS)?
-5. **Lingua principale e radice**: `/` porta a `/it/`? 🔶
+Ancora da fare / confermare:
+
+1. **Sblocco di `wrmgroup.net`** (e dei domini degli archivi foto scelti: Wikimedia Commons, Unsplash, Pexels) in Network access dell'ambiente. Al momento dell'ultimo controllo `wrmgroup.net` era ancora bloccato; in alternativa, screenshot di home e team (desktop e mobile).
+2. **Approvazione della short list di immagini** (§4.3) prima del download.
+3. **Lingua principale e radice**: `/` porta a `/it/`? 🔶
+4. **Hosting**: export statico o runtime Next.js (§6)? Può essere deciso più avanti, insieme al dominio.
 
 Da PRD §12, da raccogliere senza bloccare la Fase 1:
 
