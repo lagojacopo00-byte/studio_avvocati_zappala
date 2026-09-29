@@ -1,17 +1,21 @@
 # code.md — Studio Avvocati Zappalà
 
-Versione 0.2 · 29 settembre 2026 · Specifica per la futura realizzazione.
-Documento complementare a PRD.md; nessun sito implementato in questa fase.
+Versione 0.3 · 29 settembre 2026 · Specifica per la realizzazione.
+Documento complementare a PRD.md. Dalla v0.3 il sito è in sviluppo in anteprima (vedi `PIANO.md` e `LOOP.md`); la pubblicazione non è autorizzata.
 
 ## 1. Vincoli di lavoro
 
-L'incarico attuale riguarda soltanto due documenti. Non creare applicazioni, installare pacchetti, avviare preview o pubblicare. Non modificare il sito Intreia né ereditarne logo, dominio, contatti o hosting.
+**Aggiornamento v0.3.** Lo sviluppo è autorizzato dall'utente (29 settembre 2026) in ambiente di anteprima. Restano fuori dall'incarico: pubblicazione, configurazione del dominio e di Search Console, modifiche a profili esterni. Non modificare il sito Intreia né ereditarne logo, dominio, contatti o hosting.
+
+Versione 0.2 (superata): l'incarico riguardava soltanto due documenti; niente applicazioni, pacchetti, preview o pubblicazione.
 
 Requisiti confermati: sito vetrina di Studio Avvocati Zappalà; italiano e inglese; qualità istituzionale e SEO nominativa; tutti i professionisti rappresentati; nessun form o prenotazione; palette neutra e blu scuro; architetture romane senza Colosseo; logo, foto e biografie provvisori.
 
 ## 2. Architettura da scegliere
 
-Stack non ancora deciso. Preferire pagine statiche o renderizzate sul server, con contenuti principali presenti nell'HTML e JavaScript limitato alle interazioni. Se il cliente aggiornerà spesso i contenuti, valutare un CMS con anteprima e stati editoriali; altrimenti contenuti strutturati separati dai componenti.
+**Decisioni v0.3 (utente, 29 settembre 2026):** stack **Next.js** (App Router, tutte le pagine pre-generate al build); contenuti come file JSON nel repository, validati con Zod e separati dai componenti; **aggiornamenti a cura di uno sviluppatore tramite il repository, senza CMS nella v1** (un CMS basato su git potrà essere aggiunto senza cambiare i componenti); fonte delle foto di architettura: archivi a licenza libera con registro licenze. Un layout radice per lingua garantisce `<html lang>` esatto; la 404 è un documento completo (`global-not-found`).
+
+Principio invariato: contenuti principali presenti nell'HTML e JavaScript limitato alle interazioni (menu, selettore lingua, indicatore di sezione). Resta aperta la scelta tra export statico e hosting con runtime Next.js, da decidere con dominio e hosting.
 
 Nessun database, servizio email, endpoint per moduli, calendario, CRM o account utente necessario per il perimetro attuale. Non installarli in previsione di un uso ipotetico. Hosting, versioni e dipendenze saranno scelti e verificati nella fase di realizzazione.
 
@@ -124,4 +128,4 @@ Verificare browser desktop e almeno Safari iOS/Chrome Android, usando versioni c
 
 Servono una futura richiesta di realizzazione, chiarimento dei servizi e del family office, scelta del dominio e della gestione editoriale. Organico, fotografie e biografie sono rinviati dall'utente e restano placeholder nelle bozze; non richiederli come condizione per consegnare questi documenti.
 
-Prima della pubblicazione completare e approvare tutti i contenuti IT/EN, verificare immagini, identità, recapiti, SEO e informative. Il logo può restare tipografico soltanto se questa scelta viene confermata per il sito pubblico. Questo documento non autorizza sviluppo o pubblicazione.
+Prima della pubblicazione completare e approvare tutti i contenuti IT/EN, verificare immagini, identità, recapiti, SEO e informative. Il logo può restare tipografico soltanto se questa scelta viene confermata per il sito pubblico. Dalla v0.3 lo sviluppo in anteprima è autorizzato; questo documento non autorizza la pubblicazione. La build di produzione fallisce finché restano segnaposto, immagini non approvate o un `SITE_URL` non valido (`npm run build:production`).
