@@ -1,6 +1,6 @@
 # PIANO — Sito Studio Avvocati Zappalà
 
-Versione 0.2 · 29 settembre 2026 · Piano di realizzazione, da eseguire in una seconda fase (coding con loop engineering).
+Versione 0.3 · 29 settembre 2026 · Piano di realizzazione, da eseguire in una seconda fase (coding con loop engineering).
 Documenti di riferimento: `PRD.md` (prodotto e direzione artistica) e `code.md` (specifica tecnica). Questo piano non li sostituisce: li traduce in fasi, task e verifiche.
 
 Stato: **bozza con assunzioni esplicite**. Le assunzioni ancora da confermare sono marcate con 🔶 (sezione 11). Le scelte già prese dall'utente sono marcate con ✅.
@@ -10,7 +10,7 @@ Stato: **bozza con assunzioni esplicite**. Le assunzioni ancora da confermare so
 | Tema | Decisione |
 |---|---|
 | Fonte delle foto di architettura | ✅ Archivi a licenza libera (Wikimedia Commons, Unsplash, Pexels), con registro licenze; eventuale sostituzione futura con un fotografo |
-| Riferimento WRM | ✅ L'utente sbloccherà il dominio `wrmgroup.net` nelle impostazioni dell'ambiente (all'ultimo controllo era ancora bloccato) |
+| Riferimento WRM | ✅ Dominio sbloccato dall'utente e riferimento ispezionato (§2). Home ripresa dal modello a schermate con frase serif grande; team anche in home |
 | Stack | ✅ **Next.js** (scelta dell'utente; la bozza 0.1 raccomandava Astro, vedi §6 per le conseguenze) |
 | Aggiornamento contenuti | ✅ Uno sviluppatore, tramite file nel repository; nessun CMS nella v1 |
 
@@ -18,30 +18,54 @@ Stato: **bozza con assunzioni esplicite**. Le assunzioni ancora da confermare so
 
 ## 1. Cosa stiamo costruendo
 
-Un sito vetrina istituzionale, bilingue (IT/EN), che diventi la fonte ufficiale per chi cerca lo studio o i suoi avvocati. Niente moduli, prenotazioni o funnel. La **home** segue l'impostazione del sito di riferimento (wrmgroup.net): hero fotografico a tutta larghezza, titoli serif grandi, sezioni distinte, alternanza di superfici scure e chiare, **team in primo piano**. Composizione, testi e immagini restano originali.
+Un sito vetrina istituzionale, bilingue (IT/EN), che diventi la fonte ufficiale per chi cerca lo studio o i suoi avvocati. Niente moduli, prenotazioni o funnel. La **home** segue l'impostazione del sito di riferimento (wrmgroup.net): sezioni a pieno schermo con colonna fotografica di architettura e una frase serif molto grande, superfici blu scure, header essenziale con Menu a tutto schermo, **team in primo piano**. Composizione, testi e immagini restano originali.
 
 Priorità dichiarate dall'utente: home sul modello WRM · architetture eleganti di Roma (no Colosseo) · **grande importanza al team** (foto in arrivo).
 
-## 2. Limite noto: il riferimento non è stato visto direttamente
+## 2. Il riferimento (wrmgroup.net): cosa ho visto
 
-In questa sessione il dominio `wrmgroup.net` è bloccato dalla rete del container. La struttura della home qui sotto deriva dalle osservazioni già nel PRD §3 (titoli serif grandi, logo in alto a sinistra, menu compatto a destra, superfici scure, immagini a fianco dei messaggi, sezione team con nomi/ruoli/profili), non da un'ispezione completa.
+Ispezionato il 29 settembre 2026 scaricando HTML e CSS e fotografando le pagine con un browser (desktop 1440 px e mobile 390 px). Cosa fa il sito:
 
-Prima del coding serve una di queste due cose (vedi §11): sbloccare il dominio nelle impostazioni dell'ambiente, oppure fornire screenshot della home e della pagina team (desktop e mobile).
+**Home**: 4 “schermate” a pieno schermo, che cambiano con la rotella del mouse (scorrimento forzato).
+- Schermate 1–2: colonna immagine a sinistra (~30% della larghezza, fotografia di architettura con velo blu) e, a destra, **una sola frase in serif molto grande** (3 righe). Schermata 3 (ultima): solo testo, titolo enorme in basso a sinistra su fondo pieno.
+- Navigazione a **quattro quadratini dorati** sul lato destro con una linea verticale; ogni quadratino porta alla schermata corrispondente.
+- Header: marchio a sinistra; a destra **IT/EN** e un pulsante **“Menu”**. Il menu apre un pannello a tutto schermo blu molto scuro con voci grandi in serif (Home, Chi siamo, Cosa facciamo, Team, Contatti…).
+- Su mobile: immagine in alto (circa metà schermo), testo sotto, quadratini a destra.
+- La home **non contiene il team**: il team ha una pagina a parte.
+
+**Pagina Team**: fondo blu ardesia; a sinistra titolo “The Team” in serif dorato e filtro per sede; a destra **griglia a 3 colonne di ritratti**, formato circa 3:4, sfondo grigio uniforme di studio, mezzo busto, braccia conserte, giacche scure. Sotto ogni foto: **nome in serif bianco e ruolo in maiuscoletto piccolo dorato**. Ogni persona ha un profilo con URL proprio (`/team/nome-cognome/`). Circa 19 persone. Versione italiana sotto `/it/`.
+
+**Stile**: serif Prata per titoli, Lato per il corpo; blu ardesia `#31354b`, blu notte `#0b123a`, accento oro `#cda434`. Il sito mostra anche un avviso e un banner cookie a comparsa: non li riprendiamo.
+
+Nota tecnica: i titoli sono testo HTML normale, quindi il sito resta leggibile dai motori di ricerca nonostante l'effetto a schermate.
+
+### Cosa prendiamo, cosa adattiamo, cosa lasciamo
+
+| | Riferimento | Per Studio Zappalà |
+|---|---|---|
+| **Prendiamo** | Sezioni a pieno schermo con una frase serif grande; colonna immagine + testo; header essenziale con IT/EN e Menu a tutto schermo; quadratini di navigazione; griglia a 3 colonne di ritratti uniformi con nome serif e ruolo in maiuscoletto | Stessa impostazione, con testi, foto e marchio originali |
+| **Adattiamo** | Scorrimento forzato con la rotella | ✅ *Nessuno scroll forzato* (code.md §6): scorrimento normale, sezioni alte almeno a schermo intero, quadratini come semplici link di ancoraggio 🔶 |
+| **Adattiamo** | Team solo in una pagina a parte | Il team compare **anche nella home** (richiesta dell'utente: grande importanza al team) |
+| **Adattiamo** | Accento oro | Il PRD esclude un oro dominante: usare la palette blu/avorio del PRD; eventuale accento discreto da validare nei contrasti 🔶 |
+| **Lasciamo** | Logo, testi, foto, avviso di comparsa, filtro per sede | Il filtro per sede serve solo se lo studio avrà più sedi |
 
 ## 3. Home: struttura proposta
 
-Mappatura dal riferimento a Studio Zappalà. Ogni blocco ha larghezza di lettura controllata e nessuno scroll forzato.
+Sezioni alte almeno a schermo intero, scorrimento naturale. Contenuti principali sempre nell'HTML.
 
 | # | Blocco | Superficie | Contenuto | Note |
 |---|---|---|---|---|
-| 1 | Header | trasparente su hero → blu notte allo scroll | Marchio testuale “Studio Avvocati Zappalà” a sinistra; nav compatta a destra: Lo studio · Competenze · Persone · Contatti · IT/EN | Menu mobile accessibile (code.md §6) |
-| 2 | Hero | foto architettonica a tutta altezza, velo blu notte | H1 serif grande, una frase introduttiva, link sobrio a “Lo studio” | Nessun pulsante commerciale, nessun claim o numero inventato |
-| 3 | Lo studio | avorio | 80–120 parole in serif grande, link “Scopri lo studio” | Testo da redigere dopo chiarimento servizi |
-| 4 | Competenze | blu notte | Righe editoriali: diritto civile · commerciale · aziendale (+ family office solo se confermato) | Ogni riga con immagine architettonica di dettaglio |
-| 5 | Intermezzo fotografico | foto a tutta larghezza | Una riga di testo, nessuna call to action | Ritmo fotografico come nel riferimento |
-| 6 | **Persone** | avorio | Titolo grande + griglia di ritratti 4:5, nome e ruolo sempre visibili, link a ogni profilo, “Tutte le persone” | **Blocco più importante della home** (vedi §5) |
-| 7 | Chiusura istituzionale | blu notte | Approccio in una frase + recapiti discreti o sede | Nessun funnel |
-| 8 | Footer | blu notte | Denominazione, sedi, recapiti, informative, selettore lingua | Solo dati confermati |
+| 1 | Header | trasparente su foto → blu notte allo scroll | Marchio testuale “Studio Avvocati Zappalà” a sinistra; a destra IT/EN e “Menu” (pannello a tutto schermo su mobile; su desktop pannello o voci in linea, da decidere 🔶) | Menu accessibile da tastiera (code.md §6) |
+| 2 | Apertura | colonna con foto verticale di architettura (cupola, lanterna, colonnato) a sinistra + fondo blu ardesia | Una frase istituzionale in serif molto grande | Nessun claim, numero o anno inventato; nessun pulsante commerciale |
+| 3 | Lo studio | foto in colonna + blu notte | 80–120 parole in serif grande, link “Scopri lo studio” | Testo da redigere dopo chiarimento servizi |
+| 4 | Competenze | blu ardesia | Diritto civile · commerciale · aziendale (+ family office solo se confermato), frase serif e breve elenco | Voci solo se confermate |
+| 5 | **Persone** | blu notte | Titolo serif + griglia a 3 colonne di ritratti uniformi, nome e ruolo sempre visibili, link a ogni profilo, “Tutte le persone” | **Blocco più importante della home** (vedi §5); differenza voluta rispetto al riferimento |
+| 6 | Chiusura | fondo pieno, titolo grande in basso a sinistra (come l'ultima schermata di WRM) | Approccio in una frase + recapiti discreti | Nessun funnel |
+| 7 | Footer | blu notte | Denominazione, sedi, recapiti, informative, selettore lingua | Solo dati confermati |
+
+Navigazione laterale a quadratini: 🔶 facoltativa, come link di ancoraggio che non blocca lo scorrimento.
+
+Le fotografie della colonna immagine sono **ritagli verticali**: le architetture alte e strette (lanterna di Sant'Ivo, cupole, colonnati) si adattano meglio di quelle orizzontali. Vedi §4.
 
 Pagine collegate (URL da code.md §3): `/it/studio/`, `/it/competenze/`, `/it/persone/`, `/it/persone/{slug}/`, `/it/contatti/`, 404, informative; gli equivalenti `/en/…`. Family office e dettagli di competenza solo se approvati.
 
@@ -53,7 +77,7 @@ Non posso prendere le foto da Google Immagini, e sconsiglio di farlo anche a man
 
 - i risultati di Google **non sono licenziati**: quasi tutte le foto sono protette dal diritto d'autore. Per uno studio legale un contenzioso per uso non autorizzato di immagini è un danno di reputazione;
 - il PRD lo vieta già: A08 “nessuna immagine senza autorizzazione”, e il modello dei contenuti richiede per ogni immagine autore, licenza e credito;
-- in questo container Google e i principali archivi sono comunque bloccati dalla rete.
+- Google Immagini restituisce anteprime e rimandi ai siti di terzi, non file con licenza.
 
 ### 4.2 Alternative valutate (scelta: A ✅)
 
@@ -85,7 +109,7 @@ Nessun Colosseo, nessuna cartolina, niente folla. Preferire dettagli, scorci e l
 - Cupola di Sant'Agnese in Agone; lanterne e tamburi in genere
 - Pantheon: solo dettagli (cassettoni, cornici), niente inquadrature da cartolina
 
-Servono immagini con spazio libero per il testo, saturazione contenuta e formato orizzontale ampio (min. 2400 px sul lato lungo) per l'hero, oltre a ritagli verticali per mobile.
+Il riferimento usa una **colonna fotografica verticale** (~30% della larghezza) accanto alla frase serif: servono quindi soprattutto immagini o ritagli **verticali** (lanterna, cupola con tamburo, colonnato, scala), con saturazione contenuta e zone scure adatte al velo blu. Min. 2400 px sul lato lungo. Qualche immagine orizzontale ampia può servire per la pagina Lo studio e per le condivisioni social.
 
 ### 4.4 Registro immagini
 
@@ -99,19 +123,19 @@ Processo: io preparo una **short list con URL e licenza esatti**; tu approvi; so
 
 - **Home §6**: griglia grande di ritratti, non un carosello. Andrea Zappalà è il primo nominativo confermato; l'ordine degli altri segue il campo `ordine`.
 - **Pagina Persone**: tutto l'organico pubblico, stessa griglia. Filtri solo se il numero di persone lo giustifica (code.md §6).
-- **Profilo nominativo** per ogni avvocato: ritratto 4:5 a sinistra (sticky su desktop), biografia a destra, ruolo, attività seguite, lingue e qualifiche solo se documentate, collegamenti a studio e competenze, recapiti solo se autorizzati.
+- **Profilo nominativo** per ogni avvocato: ritratto a sinistra (sticky su desktop, stesso rapporto della griglia), biografia a destra, ruolo, attività seguite, lingue e qualifiche solo se documentate, collegamenti a studio e competenze, recapiti solo se autorizzati.
 
 ### 5.2 Predisposto per l'arrivo delle foto
 
 - Una cartella per persona e un file dati per lingua: `content/people/{slug}/it.md`, `en.md`, più `foto.jpg` in ingresso. Aggiungere una persona = aggiungere una cartella.
 - La griglia si adatta a qualsiasi numero (da 1 a molte decine) senza modifiche al codice: 1 colonna su mobile, 2 su tablet, 3 su desktop (base di lavoro, code.md §5).
-- **Pipeline foto**: dall'originale genera AVIF/WebP/JPEG a più larghezze, ritaglio 4:5 con punto focale configurabile, trattamento cromatico uniforme (desaturato, bianco e nero come alternativa da validare) applicato al build, così foto scattate in momenti diversi risultano coerenti.
-- **Placeholder** chiari e uniformi: riquadro 4:5 in tonalità pietra con la dicitura “Foto in arrivo”, stato `placeholder`. Nessun volto sintetico, nessun nome fittizio.
+- **Pipeline foto**: dall'originale genera AVIF/WebP/JPEG a più larghezze, ritaglio con punto focale configurabile (rapporto 3:4 come nel riferimento, oppure 4:5 come proposto nel PRD: 🔶 da scegliere; nel codice è un solo valore), trattamento cromatico uniforme (desaturato, bianco e nero come alternativa da validare) applicato al build, così foto scattate in momenti diversi risultano coerenti.
+- **Placeholder** chiari e uniformi: riquadro nel rapporto scelto in tonalità pietra con la dicitura “Foto in arrivo”, stato `placeholder`. Nessun volto sintetico, nessun nome fittizio.
 - **Guardia di pubblicazione**: in produzione il build fallisce se una pagina pubblicata contiene ancora un placeholder, un testo segnaposto o un contenuto non `pubblicabile` (criterio A08). Le anteprime sono `noindex` **e** protette da accesso (noindex non è riservatezza, code.md §7).
 
 ### 5.3 Indicazioni per lo shooting dei ritratti 🔶
 
-Utili se si vuole risparmiare lavoro di ritocco: stesso fondo e stessa luce per tutti, mezzo busto, stessa distanza e altezza dell'obiettivo, spazio sopra la testa per il ritaglio 4:5, file originali ad alta risoluzione (almeno 1600×2000 px), consenso alla pubblicazione per ciascuna persona.
+Utili se si vuole risparmiare lavoro di ritocco: stesso fondo e stessa luce per tutti, mezzo busto, stessa distanza e altezza dell'obiettivo, spazio sopra la testa per il ritaglio (3:4 o 4:5), file originali ad alta risoluzione (almeno 1600×2000 px), consenso alla pubblicazione per ciascuna persona.
 
 ## 6. Stack e architettura
 
@@ -161,8 +185,8 @@ Nessuna promessa di posizionamento né di rimozione di risultati esterni.
 Ogni task ha una **condizione di completamento verificabile da macchina**, così il loop può ripetersi finché la verifica non passa. Gli strumenti di verifica sono una proposta.
 
 ### Fase 0 — Decisioni e materiali (prima del coding)
-- Risposte alle domande residue del §11; sblocco rete (o screenshot) del riferimento e dei domini foto.
-- Ispezione del riferimento WRM e aggiornamento del §3 sulla struttura reale.
+- Risposte alle domande residue del §11.
+- ✅ Ispezione del riferimento WRM fatta (§2, §3).
 - Short list immagini approvata (§4.3) e registro licenze avviato.
 - Aggiornamento di `PRD.md` e `code.md` alla v0.3 con le scelte prese (stack Next.js, fonte immagini, aggiornamenti via repository, lingua principale). Nota: il PRD v0.2 escludeva ogni acquisizione di immagini “in questa fase”: la v0.3 deve autorizzare esplicitamente la selezione e il download delle immagini approvate.
 - **Fatto quando**: decisioni registrate nei documenti, short list approvata.
@@ -203,7 +227,7 @@ Ogni task ha una **condizione di completamento verificabile da macchina**, così
 
 | Rischio | Effetto | Mitigazione |
 |---|---|---|
-| Riferimento non ispezionato | Home diversa dall'aspettativa | Screenshot o sblocco dominio prima della Fase 2 |
+| Effetto a schermate del riferimento in conflitto con “nessuno scroll forzato” | Accessibilità e usabilità peggiori, rischio di regressioni su mobile | Scorrimento naturale con sezioni a schermo intero; niente blocco della rotella (§2) |
 | Immagini senza licenza | Contestazioni, violazione di A08 | Registro licenze, build che blocca, short list approvata |
 | Foto del team in ritardo o disomogenee | Lancio bloccato o sito poco coerente | Placeholder e pipeline di uniformazione, brief di shooting |
 | Family office e servizi non definiti | Testi e menu incerti | Voce condizionata; testi dopo chiarimento |
@@ -213,14 +237,15 @@ Ogni task ha una **condizione di completamento verificabile da macchina**, così
 
 ## 11. Domande aperte
 
-Già risolte ✅ (29 settembre 2026): fonte foto = archivi a licenza libera; stack = Next.js; aggiornamenti = sviluppatore via repository; riferimento WRM = l'utente sblocca il dominio.
+Già risolte ✅ (29 settembre 2026): fonte foto = archivi a licenza libera; stack = Next.js; aggiornamenti = sviluppatore via repository; riferimento WRM = dominio sbloccato e sito ispezionato (§2).
 
 Ancora da fare / confermare:
 
-1. **Sblocco di `wrmgroup.net`** (e dei domini degli archivi foto scelti: Wikimedia Commons, Unsplash, Pexels) in Network access dell'ambiente. Al momento dell'ultimo controllo `wrmgroup.net` era ancora bloccato; in alternativa, screenshot di home e team (desktop e mobile).
+1. **Accesso alle foto**: `upload.wikimedia.org` e `images.unsplash.com` rispondono; `commons.wikimedia.org` ha risposto “429 troppe richieste” (limite lato Wikimedia sull'IP condiviso del container, da riprovare) e `www.pexels.com` risponde 403 (protezione anti-bot). Per Pexels e per i casi bloccati le foto possono essere scaricate a mano dall'utente dalla short list.
 2. **Approvazione della short list di immagini** (§4.3) prima del download.
 3. **Lingua principale e radice**: `/` porta a `/it/`? 🔶
 4. **Hosting**: export statico o runtime Next.js (§6)? Può essere deciso più avanti, insieme al dominio.
+5. **Dettagli della home** (§2–§3): scorrimento naturale al posto delle schermate forzate, quadratini di navigazione sì/no, menu a tutto schermo anche su desktop o voci in linea, rapporto dei ritratti 3:4 o 4:5, accento di colore oltre a blu e avorio. Ho proposto un default per ciascuno, marcato 🔶.
 
 Da PRD §12, da raccogliere senza bloccare la Fase 1:
 
