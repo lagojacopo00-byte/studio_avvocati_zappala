@@ -80,7 +80,10 @@ export const ImageRegisterSchema = z.array(
     file: Text,
     subject: Text,
     author: Text,
+    /** pagina della fonte (dove si verificano autore e licenza) */
     source: z.url(),
+    /** file originale da scaricare dopo l'approvazione (scripts/fetch-images.mjs) */
+    fileUrl: z.url().optional(),
     license: Text,
     credit: z.string().nullable(),
     verifiedOn: Text,
