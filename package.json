@@ -13,10 +13,11 @@
     "lint": "eslint .",
     "verify": "node scripts/verify.mjs",
     "images": "node scripts/fetch-images.mjs",
-    "check": "npm run typecheck && npm run lint && npm run build && npm run verify"
+    "check": "npm run typecheck && npm run lint && npm test && npm run build && npm run verify",
+    "test": "node --test tests/*.test.mjs"
   },
   "engines": {
-    "node": ">=20.9"
+    "node": ">=22.18"
   },
   "dependencies": {
     "next": "^16.3.7",

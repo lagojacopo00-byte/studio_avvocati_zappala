@@ -5,7 +5,7 @@ Il progetto è costruito in modo che ogni modifica passi da **controlli automati
 ## Il ciclo
 
 ```bash
-npm run check      # typecheck → lint → build → verify (circa 1 minuto)
+npm run check      # typecheck → lint → test → build → verify (circa 1 minuto)
 ```
 
 Oppure a pezzi, per iterare più in fretta:
@@ -14,9 +14,10 @@ Oppure a pezzi, per iterare più in fretta:
 |---|---|---|
 | `npm run typecheck` | Tipi TypeScript | dopo ogni modifica al codice |
 | `npm run lint` | ESLint (regole Next.js e React) | dopo ogni modifica al codice |
+| `npm test` | Test unitari (`tests/`, runner di Node): mappa URL IT/EN e selettore lingua, licenze, contenuti, dizionari IT/EN, persone di esempio, guardia di produzione | dopo ogni modifica alla logica |
 | `node scripts/check-content.mjs` | Schemi dei contenuti, slug/id/ordine unici, titoli e descrizioni unici per lingua, immagini nel registro | dopo ogni modifica a `content/` |
 | `npm run build` | Compilazione e generazione delle pagine | prima di `verify` |
-| `npm run verify` | Sito vero, server avviato: vedi sotto | dopo `build` |
+| `npm run verify` | Sito vero, server avviato: vedi sotto (`-- --skip-axe` salta la scansione di accessibilità per iterare più in fretta) | dopo `build` |
 | `npm run build:production` | Come il build, ma **fallisce finché restano segnaposto** o `SITE_URL` non è il dominio reale | prima di ogni pubblicazione |
 
 Ogni comando esce con **codice 0 se tutto è a posto e 1 se qualcosa fallisce**, stampando i fallimenti uno per riga con l'area tra parentesi (`[hreflang]`, `[a11y]`, `[responsive]`…). Il rapporto completo è in `reports/verify.json`; le schermate di lavoro in `reports/screens/` (non versionate).
@@ -30,6 +31,20 @@ Ogni comando esce con **codice 0 se tutto è a posto e 1 se qualcosa fallisce**,
 - **Layout (A06)**: nessuno scorrimento orizzontale a **320, 390, 768, 1280, 1440 px**, su tutte le pagine.
 - **Accessibilità (A07)**: scansione **axe** con tag WCAG 2.2 AA a 1280 e 390 px (bloccanti: gravi e critici); menu da tastiera con trappola del focus, Escape e ritorno del focus; selettore lingua che apre la pagina equivalente; **sito utilizzabile senza JavaScript**; `prefers-reduced-motion` rispettato.
 - **Contrasti**: rapporti calcolati dai token di `src/app/globals.css` (soglia 4,5:1 per il testo).
+- **Intestazione e griglia**: il nome dello studio resta su una riga a 360–1280 px; la griglia delle persone ha 2 colonne sotto i 900 px e 3 sopra.
+- **Prestazioni in laboratorio (telefono)**: nessuna immagine oltre 300 KB, LCP ≤ 2,5 s, CLS ≤ 0,1. Sono misure locali che proteggono dalle regressioni: non sostituiscono i dati reali (INP si misura solo sul campo).
+- **Sicurezza**: header `nosniff`, `Referrer-Policy`, `X-Frame-Options`, `Permissions-Policy`; niente `x-powered-by`. HSTS e CSP spettano all'hosting HTTPS.
+- **Immagine social e crediti**: `og:image` assoluta e raggiungibile, `twitter:card`; ogni foto approvata compare nella pagina Crediti di entrambe le lingue; le immagini si caricano davvero.
+
+### Integrazione continua
+
+`.github/workflows/check.yml` esegue `npm run check` a ogni push e pull request e salva `reports/` come artefatto. (Il workflow è stato scritto e validato come YAML, ma il primo passaggio reale avviene su GitHub.)
+
+### Regole del ciclo (imparate lavorando)
+
+1. **Rosso prima del verde.** Prima si scrive il controllo e lo si vede fallire, poi si scrive il codice.
+2. **Un controllo deve poter fallire.** Un controllo che misurava l'elemento sbagliato (il riquadro di un elemento flex, sempre uno, invece delle righe del testo) è passato quando avrebbe dovuto fallire. Si prova con un «sabotaggio»: budget impossibile per le prestazioni, mutazioni del codice per i test.
+3. **Il ciclo trova le regressioni.** Una correzione a 390 px aveva causato 2 px di scorrimento orizzontale a 320 px: l'ha segnalato il controllo sui 5 formati, non l'occhio.
 
 > Un punteggio automatico **non** dimostra la conformità WCAG. I controlli manuali (tastiera reale, zoom, lettori di schermo, foto, leggibilità) restano nella fase di collaudo.
 
@@ -67,14 +82,14 @@ Registrare in `content/images.json`: file, soggetto, autore, fonte (URL), licenz
 
 ## Stato e prossimi passi
 
-Fatto: fondamenta, tutte le pagine IT/EN con contenuti segnaposto, cicli di verifica.
+Fatto: fondamenta, tutte le pagine IT/EN con contenuti segnaposto, cicli di verifica, tre foto approvate con pagina Crediti, budget di prestazioni, header di sicurezza, immagine social, test unitari, integrazione continua.
 
 Da fare (in ordine, ognuno con la sua condizione di completamento):
 
-1. **Foto di architettura**: inserire le immagini approvate dalla short list (`docs/shortlist-immagini.md`) nel registro e nella home. *Fatto quando:* `verify` passa e nella home non compare più il segnaposto delle immagini.
+1. **Altre foto di architettura**: approvare dalla short list (`docs/shortlist-immagini.md`) le immagini per le pagine interne (Lo studio, Competenze, Contatti). Ogni foto CC BY-SA va approvata caso per caso. *Fatto quando:* `verify` passa e le pagine interne non hanno segnaposto d'immagine.
 2. **Team**: contenuti e foto reali per ogni persona; ritratti uniformati. *Fatto quando:* nessun `data-placeholder` nelle pagine persone e ogni profilo ha ruolo, biografia IT/EN e foto approvata.
 3. **Testi**: studio, competenze, contatti, informativa (dopo il chiarimento di servizi, sedi e family office). *Fatto quando:* tutti gli stati sono `pubblicabile`.
 4. **Rifinitura visiva**: confronto con il riferimento su desktop e mobile (schermate in `reports/screens/`).
-5. **Pipeline immagini**: script `sharp` per varianti AVIF/WebP, ritaglio con punto focale e trattamento cromatico uniforme (solo se si sceglie l'export statico; altrimenti `next/image`).
-6. **Prestazioni**: budget hero mobile ≈ 300 KB e ritratto ≈ 120 KB; LCP ≤ 2,5 s, CLS ≤ 0,1, INP ≤ 200 ms in laboratorio.
+5. **Trattamento cromatico uniforme** delle foto di autori diversi (e dei ritratti), applicato al download in `scripts/fetch-images.mjs`. *Fatto quando:* le foto in home risultano omogenee a confronto affiancato.
+6. **Prestazioni con ritratti reali**: budget ritratto ≈ 120 KB (oggi il controllo è a 300 KB per ogni immagine) e verifica su dati reali (INP ≤ 200 ms) dopo il lancio.
 7. **Lancio**: dominio, `SITE_URL`, hosting, Search Console, baseline delle ricerche nominative.

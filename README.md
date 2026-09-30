@@ -15,12 +15,13 @@ Stato: **anteprima con contenuti segnaposto**. Foto di architettura, ritratti, b
 
 ## Avvio
 
-Serve Node.js 20.9 o superiore.
+Serve Node.js 22.18 o superiore (gli script leggono direttamente i file TypeScript). Per i controlli nel browser serve Chromium (`npx playwright-core install chromium`, oppure `CHROMIUM_PATH`).
 
 ```bash
 npm install
 npm run dev          # http://localhost:3000 → /it/
-npm run check        # typecheck + lint + build + verifica automatica
+npm run check        # typecheck + lint + test + build + verifica automatica
+npm test             # solo i test unitari
 ```
 
 ## Stack

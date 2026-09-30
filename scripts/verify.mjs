@@ -301,7 +301,7 @@ async function checkRoutingAndFiles(expected) {
 async function checkBrowser(expected) {
   const { chromium } = await import("playwright-core");
   const { default: AxeBuilder } = await import("@axe-core/playwright");
-  const exe = process.env.CHROMIUM_PATH ?? "/opt/pw-browsers/chromium";
+  const exe = process.env.CHROMIUM_PATH ?? (fs.existsSync("/opt/pw-browsers/chromium") ? "/opt/pw-browsers/chromium" : undefined);
   const browser = await chromium.launch({ executablePath: exe, args: ["--no-proxy-server"] });
   fs.mkdirSync("reports/screens", { recursive: true });
   const shotKeys = new Set(["home", "people"]);

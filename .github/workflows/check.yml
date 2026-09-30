@@ -1,0 +1,31 @@
+name: check
+
+# Esegue lo stesso ciclo che si lancia in locale (npm run check): tipi, lint, test, build e verifica automatica
+# su un server reale (SEO, link, layout a 5 larghezze, accessibilità, tastiera, prestazioni).
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+      - run: npm ci
+      - name: Installa Chromium per i controlli nel browser
+        run: npx playwright-core install --with-deps chromium
+      - name: Percorso di Chromium
+        run: echo "CHROMIUM_PATH=$(node -e "console.log(require('playwright-core').chromium.executablePath())")" >> "$GITHUB_ENV"
+      - run: npm run check
+      - name: Rapporti e schermate di lavoro
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: reports/
+          if-no-files-found: ignore
