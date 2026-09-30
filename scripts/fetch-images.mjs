@@ -4,7 +4,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
-import { getImages } from "../src/lib/content.ts";
+import { getImages, getSlotImage } from "../src/lib/content.ts";
 
 const MAX_SIDE = 2400;
 const FORCE = process.argv.includes("--force");
@@ -52,5 +52,23 @@ for (const img of getImages()) {
     console.error(`✗ ${img.id}: ${e.message}`);
     failed = true;
   }
+}
+// Immagine per la condivisione social: 1200×630 ricavata dall'immagine dell'apertura, ritagliata attorno al punto focale.
+const hero = getSlotImage("home-hero");
+const heroFile = hero && path.join("public", "images", hero.file);
+if (heroFile && fs.existsSync(heroFile)) {
+  const meta = await sharp(heroFile).metadata();
+  const [W, H] = [meta.width, meta.height];
+  const ratio = 1200 / 630;
+  const cropW = Math.min(W, Math.round(H * ratio));
+  const cropH = Math.min(H, Math.round(cropW / ratio));
+  const left = Math.max(0, Math.min(W - cropW, Math.round(hero.focal[0] * W - cropW / 2)));
+  const top = Math.max(0, Math.min(H - cropH, Math.round(hero.focal[1] * H - cropH / 2)));
+  const info = await sharp(heroFile)
+    .extract({ left, top, width: cropW, height: cropH })
+    .resize(1200, 630)
+    .jpeg({ quality: 82, mozjpeg: true })
+    .toFile(path.join("public", "og.jpg"));
+  console.log(`✓ og.jpg: ${info.width}×${info.height}, ${(info.size / 1024).toFixed(0)} KB (da ${hero.id})`);
 }
 if (failed) process.exit(1);

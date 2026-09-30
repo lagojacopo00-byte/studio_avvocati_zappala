@@ -4,7 +4,7 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import { parse } from "node-html-parser";
-import { getImages, listRoutes } from "../src/lib/content.ts";
+import { getImages, getSlotImage, listRoutes } from "../src/lib/content.ts";
 import { LANGS, pathFor } from "../src/lib/routes.ts";
 
 const PORT = Number(process.env.VERIFY_PORT ?? 4173);
@@ -92,6 +92,7 @@ function stopServer(proc) {
 
 // ---------------------------------------------------------------- controlli HTML/SEO
 const imageChecked = new Set();
+const ogChecked = new Set();
 
 async function checkHtml(expected) {
   const pages = new Map(); // percorso → { doc, canonical, alternates }
@@ -150,6 +151,20 @@ async function checkHtml(expected) {
     const bracket = /\[[^\]]{3,}\]/.test(doc.querySelector("main")?.text ?? "");
     if (PRODUCTION && (placeholders || bracket)) fail("segnaposto", at(`segnaposto ancora presenti (${placeholders} immagini, testo tra parentesi: ${bracket})`));
     if (!PRODUCTION && (placeholders || bracket)) count("pagine con segnaposto (ok in anteprima)");
+
+    // Immagine per la condivisione social: assoluta sul dominio ufficiale e davvero raggiungibile (code.md §7.7)
+    if (getSlotImage("home-hero")) {
+      const og = doc.querySelector('meta[property="og:image"]')?.getAttribute("content");
+      if (!og) fail("social", at("manca og:image"));
+      else if (!og.startsWith(SITE_URL + "/")) fail("social", at(`og:image non assoluta sul dominio: ${og}`));
+      else if (!ogChecked.has(og)) {
+        ogChecked.add(og);
+        const r = await fetch(BASE + og.slice(SITE_URL.length));
+        count("og:image raggiungibili");
+        if (!r.ok || !(r.headers.get("content-type") ?? "").startsWith("image/")) fail("social", `${og} non caricabile → ${r.status}`);
+      }
+      if (doc.querySelector('meta[name="twitter:card"]')?.getAttribute("content") !== "summary_large_image") fail("social", at("twitter:card ≠ summary_large_image"));
+    }
 
     for (const s of doc.querySelectorAll('script[type="application/ld+json"]')) {
       try {
@@ -258,6 +273,15 @@ async function checkRoutingAndFiles(expected) {
     if (!hrefs.includes("/it/") || !hrefs.includes("/en/")) fail("404", `${p}: la 404 deve rimandare a /it/ e /en/`);
   }
 
+  // Header di sicurezza sulle pagine (HSTS lo imposta l'hosting HTTPS, non il server Node)
+  const hdr = (await get("/it/")).headers;
+  const need = { "x-content-type-options": /nosniff/i, "referrer-policy": /strict-origin-when-cross-origin|no-referrer|same-origin/i, "x-frame-options": /sameorigin|deny/i, "permissions-policy": /camera=\(\)/ };
+  for (const [name, re] of Object.entries(need)) {
+    count("header di sicurezza controllati");
+    if (!re.test(hdr.get(name) ?? "")) fail("sicurezza", `header ${name} mancante o non valido: "${hdr.get(name)}"`);
+  }
+  if (hdr.get("x-powered-by")) fail("sicurezza", `x-powered-by esposto: ${hdr.get("x-powered-by")}`);
+
   const robots = await (await get("/robots.txt")).text();
   if (PRODUCTION) {
     if (/Disallow:\s*\/\s*$/m.test(robots)) fail("robots", "robots.txt blocca tutto in produzione");
@@ -335,6 +359,54 @@ async function checkBrowser(expected) {
         else warn("a11y", msg);
       }
     }
+    await ctx.close();
+  }
+
+  // 2b) Prestazioni in laboratorio su telefono (code.md §8): peso di ogni immagine, LCP ≤ 2,5 s, CLS ≤ 0,1.
+  // Sono misure di laboratorio su server locale: proteggono da regressioni, non sostituiscono i dati reali.
+  {
+    const budgetKb = Number(process.env.VERIFY_IMAGE_BUDGET_KB ?? 300);
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+    const page = await ctx.newPage();
+    const imgs = [];
+    page.on("response", async (res) => {
+      if (res.url().includes("/_next/image")) {
+        try {
+          imgs.push([new URL(res.url()).searchParams.get("url"), (await res.body()).length]);
+        } catch {}
+      }
+    });
+    await page.addInitScript(() => {
+      window.__cls = 0;
+      window.__lcp = 0;
+      new PerformanceObserver((l) => {
+        for (const e of l.getEntries()) if (!e.hadRecentInput) window.__cls += e.value;
+      }).observe({ type: "layout-shift", buffered: true });
+      new PerformanceObserver((l) => {
+        const es = l.getEntries();
+        window.__lcp = es[es.length - 1].startTime;
+      }).observe({ type: "largest-contentful-paint", buffered: true });
+    });
+    await page.goto(BASE + "/it/", { waitUntil: "networkidle" });
+    // scorre la pagina per far caricare anche le immagini sotto la prima schermata
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.body.scrollHeight; y += 600) {
+        window.scrollTo(0, y);
+        await new Promise((r) => setTimeout(r, 150));
+      }
+      window.scrollTo(0, 0);
+    });
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(500);
+    const m = await page.evaluate(() => ({ cls: window.__cls, lcp: window.__lcp }));
+    stats["home mobile: immagini (KB totali)"] = Math.round(imgs.reduce((s, [, n]) => s + n, 0) / 1024);
+    stats["home mobile: LCP (ms)"] = Math.round(m.lcp);
+    stats["home mobile: CLS"] = Number(m.cls.toFixed(3));
+    count("controlli prestazioni");
+    if (imgs.length === 0) warn("prestazioni", "nessuna immagine ottimizzata caricata nella home (controllo del peso non eseguito)");
+    for (const [src, n] of imgs) if (n > budgetKb * 1024) fail("prestazioni", `${src}: ${(n / 1024).toFixed(0)} KB > budget ${budgetKb} KB`);
+    if (m.lcp > 2500) fail("prestazioni", `LCP ${Math.round(m.lcp)} ms > 2500 ms`);
+    if (m.cls > 0.1) fail("prestazioni", `CLS ${m.cls.toFixed(3)} > 0.1`);
     await ctx.close();
   }
 

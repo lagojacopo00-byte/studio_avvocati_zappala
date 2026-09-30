@@ -47,6 +47,8 @@ if (errors.length === 0) {
       if (!img.alt.it || !img.alt.en) fail(`images.json: testo alternativo IT/EN mancante per "${img.id}"`);
     }
   }
+  if (getSlotImage("home-hero") && !fs.existsSync(path.join("public", "og.jpg"))) fail("manca public/og.jpg: lanciare npm run images");
+
   // Gli slot dell'interfaccia devono puntare a immagini che esistono nel registro
   const slots = JSON.parse(fs.readFileSync(path.join("content", "slots.json"), "utf8"));
   for (const [slot, id] of Object.entries(slots)) {
