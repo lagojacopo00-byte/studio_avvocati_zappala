@@ -12,6 +12,7 @@ const BASE = `http://127.0.0.1:${PORT}`;
 const PRODUCTION = process.env.SITE_ENV === "production";
 const SITE_URL = (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
 const SKIP_BROWSER = process.argv.includes("--skip-browser");
+const SKIP_AXE = process.argv.includes("--skip-axe");
 const WIDTHS = [320, 390, 768, 1280, 1440];
 
 const failures = [];
@@ -299,9 +300,29 @@ async function checkBrowser(expected) {
     await ctx.close();
   }
 
+  // 1b) Intestazione e griglia persone ai vari formati
+  for (const w of [360, 390, 768, 1280]) {
+    const ctx = await browser.newContext({ viewport: { width: w, height: 800 } });
+    const page = await ctx.newPage();
+    await page.goto(BASE + "/it/", { waitUntil: "load" });
+    // si contano le righe del TESTO (un intervallo sul contenuto), non i riquadri dell'elemento: un elemento flex ne ha sempre uno solo
+    const lines = await page.locator(".wordmark").evaluate((el) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      return new Set([...range.getClientRects()].map((r) => Math.round(r.top))).size;
+    });
+    count("controlli intestazione");
+    if (lines !== 1) fail("responsive", `il nome dello studio va su ${lines} righe a ${w}px (atteso 1)`);
+    await page.goto(BASE + "/it/persone/", { waitUntil: "load" });
+    const cols = await page.locator(".people-grid").evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length);
+    const expected = w >= 900 ? 3 : 2;
+    count("controlli griglia persone");
+    if (cols !== expected) fail("responsive", `griglia persone a ${w}px: ${cols} colonne (attese ${expected})`);
+    await ctx.close();
+  }
   step("overflow ai 5 formati");
   // 2) Accessibilità automatica (axe) a desktop e mobile: bloccanti serious/critical
-  for (const w of [1280, 390]) {
+  for (const w of SKIP_AXE ? [] : [1280, 390]) {
     const ctx = await browser.newContext({ viewport: { width: w, height: 900 } });
     const page = await ctx.newPage();
     for (const r of routes) {

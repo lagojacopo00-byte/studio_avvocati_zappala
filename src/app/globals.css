@@ -17,6 +17,9 @@
   --portrait-ratio: 3 / 4;
 }
 
+@media (max-width: 359px) {
+  :root { --gutter: 1.25rem; }
+}
 @media (min-width: 768px) {
   :root { --gutter: 3rem; }
 }
@@ -93,32 +96,33 @@ a { color: inherit; }
 .wordmark {
   font-family: var(--font-serif), Georgia, serif;
   font-weight: 600;
-  font-size: 1.1rem;
-  letter-spacing: 0.04em;
+  font-size: clamp(0.95rem, 0.5rem + 1.9vw, 1.5rem); /* ~15 px a 360 px, 24 px da 768 px */
+  letter-spacing: 0.02em;
+  white-space: nowrap;
   text-decoration: none;
   color: var(--white);
 }
+.site-header__tools { display: flex; align-items: center; gap: 0.25rem; }
 @media (min-width: 480px) {
-  .wordmark { font-size: 1.25rem; }
+  .site-header__tools { gap: 1rem; }
 }
-@media (min-width: 768px) {
-  .wordmark { font-size: 1.5rem; }
-}
-.site-header__tools { display: flex; align-items: center; gap: 1rem; }
 
 .lang-switch ul { display: flex; gap: 0.25rem; }
 .lang-switch a {
-  display: inline-block; padding: 0.5rem 0.5rem; min-width: 2.25rem; text-align: center;
-  font-size: 0.9rem; letter-spacing: 0.08em; text-decoration: none; color: var(--mist);
+  display: inline-block; padding: 0.5rem 0.3rem; min-width: 1.75rem; text-align: center;
+  font-size: 0.85rem; letter-spacing: 0.06em; text-decoration: none; color: var(--mist);
 }
 .lang-switch a[aria-current="true"] { color: var(--white); text-decoration: underline; text-underline-offset: 0.35em; }
 .lang-switch a:hover { color: var(--white); }
 
 .menu-toggle {
-  font: inherit; font-size: 0.95rem; letter-spacing: 0.08em; text-transform: uppercase;
+  font: inherit; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--ivory); background: transparent;
   border: 1px solid var(--mist); border-radius: 0;
-  padding: 0.5rem 1.1rem; cursor: pointer; min-height: 2.5rem;
+  padding: 0.5rem 0.8rem; cursor: pointer; min-height: 2.5rem;
+}
+@media (min-width: 480px) {
+  .menu-toggle { font-size: 0.95rem; letter-spacing: 0.08em; padding: 0.5rem 1.1rem; }
 }
 .menu-toggle:hover { background: var(--slate); }
 
@@ -213,17 +217,17 @@ a { color: inherit; }
 }
 
 /* Persone -------------------------------------------------------------- */
-.people-grid { display: grid; gap: 2.5rem 1.5rem; grid-template-columns: 1fr; width: 100%; max-width: 72rem; }
-@media (min-width: 540px) { .people-grid { grid-template-columns: repeat(2, 1fr); } }
+.people-grid { display: grid; gap: 1.75rem 1rem; grid-template-columns: repeat(2, 1fr); width: 100%; max-width: 72rem; }
+@media (min-width: 540px) { .people-grid { gap: 2.5rem 1.5rem; } }
 @media (min-width: 900px) { .people-grid { grid-template-columns: repeat(3, 1fr); gap: 3.5rem 2rem; } }
 
 .person-card { display: block; text-decoration: none; }
 .person-card__name {
   font-family: var(--font-serif), Georgia, serif; font-weight: 500;
-  font-size: 1.6rem; line-height: 1.2; margin-top: 1rem;
+  font-size: clamp(1.15rem, 0.85rem + 1.3vw, 1.6rem); line-height: 1.2; margin-top: 0.85rem;
 }
 .person-card:hover .person-card__name { text-decoration: underline; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
-.person-card__role { margin-top: 0.35rem; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mist); }
+.person-card__role { margin-top: 0.35rem; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--mist); }
 .is-placeholder { font-style: italic; }
 
 .portrait {
