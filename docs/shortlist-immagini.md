@@ -6,6 +6,20 @@ Sono 14 candidate scelte tra le fotografie di **Wikimedia Commons** giudicate di
 
 Non è stato scaricato nessun file di alta risoluzione. Per sceglierle ho guardato solo anteprime piccole, che non sono nella repo. La tavola numerata S01–S14, con sotto ogni foto il mio nome e il nome reale del file su Commons, è stata inviata in chat. Il registro del sito (`content/images.json`) contiene per ora solo le 3 foto di fascia A, con stato `candidata`: nel sito non compare nulla finché non passano a `approvata`.
 
+## Stato (30 settembre 2026)
+
+Approvate e già nel sito (scaricate e ridimensionate a 2400 px, con pagina «Crediti»):
+
+| Foto | Dove | Licenza |
+|---|---|---|
+| **S05** Pantheon, cassettoni della cupola | Home, apertura (colonna a sinistra) | CC0 |
+| **S07** Palazzo Barberini, scala elicoidale | Home, «Lo studio» (colonna a sinistra) | CC BY-SA 4.0 — accettata per questa sola foto: credito e nota «modificata» nella pagina Crediti |
+| **S15** San Pietro, baldacchino del Bernini (`Baldaquin Bernin Saint-Pierre Vatican.jpg`, Jebulon) | Home, «Competenze» (colonna a sinistra) | CC0 |
+
+S15 è stata scelta da me su richiesta («trovane una di San Pietro»). Alternative su San Pietro, se preferisci: la cupola vista dall'interno (`Dome of Saint Peter's Basilica (Interior).jpg`, CC BY-SA 4.0), la cupola esterna con le statue (`Cuppolas Saint Peter's basilica, Vatican City.jpg`, CC BY-SA 3.0) e la facciata al crepuscolo (fascia A).
+
+Le altre candidate restano in attesa: le CC BY-SA vanno approvate una per una.
+
 ## Decisione 1 — Le foto CC BY-SA (fascia B) sì o no?
 
 Le foto più belle e più adatte alla colonna verticale della home sono quasi tutte **CC BY-SA**. Il piano le escludeva per prudenza, quindi le ho separate: **fascia A** (3 foto) e **fascia B** (11 foto).

@@ -86,5 +86,27 @@
       0.58
     ],
     "status": "approvata"
+  },
+  {
+    "id": "san-pietro-baldacchino",
+    "file": "san-pietro-baldacchino.jpg",
+    "subject": "Basilica di San Pietro: baldacchino del Bernini",
+    "author": "Jebulon",
+    "source": "https://commons.wikimedia.org/wiki/File:Baldaquin_Bernin_Saint-Pierre_Vatican.jpg",
+    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/d/da/Baldaquin_Bernin_Saint-Pierre_Vatican.jpg",
+    "license": "CC0",
+    "credit": "Jebulon / Wikimedia Commons / CC0",
+    "verifiedOn": "2026-09-30",
+    "width": 1841,
+    "height": 2456,
+    "alt": {
+      "it": "Baldacchino del Bernini sull'altare maggiore della basilica di San Pietro",
+      "en": "Bernini's baldachin over the high altar of St. Peter's Basilica"
+    },
+    "focal": [
+      0.4,
+      0.45
+    ],
+    "status": "approvata"
   }
 ]
