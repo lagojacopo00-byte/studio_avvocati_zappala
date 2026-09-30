@@ -33,21 +33,21 @@ export function HomeView({ lang }: { lang: Lang }) {
       <JsonLd data={organizationLd(lang)} />
       <SectionDots label={ui.sectionsNav} sections={sections} />
 
-      <Panel id="hero" tone="slate" labelledBy="hero-title" media={<ArchImage imageId="home-hero" lang={lang} priority />}>
+      <Panel id="hero" tone="slate" labelledBy="hero-title" media={<ArchImage slot="home-hero" lang={lang} priority />}>
         <h1 id="hero-title" className="eyebrow">
           {ui.siteName}
         </h1>
         <p className="statement">{c.hero.statement}</p>
       </Panel>
 
-      <Panel id="firm" tone="navy" media={<ArchImage imageId="home-firm" lang={lang} />}>
+      <Panel id="firm" tone="navy" media={<ArchImage slot="home-firm" lang={lang} />}>
         <p className="statement">{c.firm.statement}</p>
         <Link className="text-link" href={pathFor(lang, "firm")}>
           {c.firm.linkLabel}
         </Link>
       </Panel>
 
-      <Panel id="expertise" tone="slate" labelledBy="expertise-title">
+      <Panel id="expertise" tone="slate" labelledBy="expertise-title" media={<ArchImage slot="home-expertise" lang={lang} />}>
         <h2 id="expertise-title" className="section-title">
           {c.expertise.title}
         </h2>

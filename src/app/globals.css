@@ -262,6 +262,8 @@ a { color: inherit; }
 .contact-list address { font-style: normal; }
 .contact-list a { text-underline-offset: 0.25em; }
 .pending-note { font-style: italic; }
+.credits-list { display: grid; gap: 1.5rem; max-width: 46rem; margin-bottom: 2.5rem; }
+.credits-list a { text-underline-offset: 0.25em; }
 
 /* Footer ------------------------------------------------------------------ */
 .site-footer { background: var(--navy); color: var(--ivory); border-top: 1px solid rgba(197, 207, 218, 0.25); }

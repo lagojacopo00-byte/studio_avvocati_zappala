@@ -6,6 +6,7 @@ import { pathFor, resolveSegments } from "@/lib/routes";
 import type { Lang, PageKey } from "@/lib/routes";
 import { buildMetadata } from "@/lib/seo";
 import { ContactView } from "./ContactView";
+import { CreditsView } from "./CreditsView";
 import { ExpertiseView } from "./ExpertiseView";
 import { FirmView } from "./FirmView";
 import { HomeView } from "./HomeView";
@@ -67,6 +68,7 @@ export function renderPage(lang: Lang, slug: string[] | undefined) {
     people: () => <PeopleView lang={lang} />,
     contact: () => <ContactView lang={lang} />,
     privacy: () => <PrivacyView lang={lang} />,
+    credits: () => <CreditsView lang={lang} />,
   };
   return views[key]();
 }

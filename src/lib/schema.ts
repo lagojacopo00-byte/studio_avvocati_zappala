@@ -74,7 +74,11 @@ export const PAGE_SCHEMAS = {
   people: z.object({ ...PageBase, h1: Text, lead: Text }),
   contact: z.object({ ...PageBase, h1: Text, lead: Text, pending: Text }),
   privacy: z.object({ ...PageBase, h1: Text, paragraphs: z.array(Text).min(1) }),
+  credits: z.object({ ...PageBase, h1: Text, lead: Text, modification: Text, empty: Text }),
 } as const;
+
+/** Slot dell'interfaccia → id dell'immagine nel registro (es. "home-hero": "pantheon-cassettoni"). */
+export const SlotsSchema = z.record(z.string(), SlugSchema);
 
 export const ImageRegisterSchema = z.array(
   z.object({

@@ -4,7 +4,7 @@
 import { spawn } from "node:child_process";
 import fs from "node:fs";
 import { parse } from "node-html-parser";
-import { listRoutes } from "../src/lib/content.ts";
+import { getImages, listRoutes } from "../src/lib/content.ts";
 import { LANGS, pathFor } from "../src/lib/routes.ts";
 
 const PORT = Number(process.env.VERIFY_PORT ?? 4173);
@@ -90,6 +90,8 @@ function stopServer(proc) {
 }
 
 // ---------------------------------------------------------------- controlli HTML/SEO
+const imageChecked = new Set();
+
 async function checkHtml(expected) {
   const pages = new Map(); // percorso → { doc, canonical, alternates }
   for (const { lang, key, slug } of expected) {
@@ -131,7 +133,17 @@ async function checkHtml(expected) {
       prev = level;
     }
 
-    for (const img of doc.querySelectorAll("img")) if (attr(img, "alt") === undefined) fail("immagini", at(`<img> senza alt: ${attr(img, "src")}`));
+    for (const img of doc.querySelectorAll("img")) {
+      if (attr(img, "alt") === undefined) fail("immagini", at(`<img> senza alt: ${attr(img, "src")}`));
+      const src = attr(img, "src");
+      if (src && src.startsWith("/") && !imageChecked.has(src)) {
+        // l'immagine deve davvero caricarsi (file presente, ottimizzatore attivo)
+        imageChecked.add(src);
+        const r = await fetch(BASE + src);
+        count("immagini caricate");
+        if (!r.ok || !(r.headers.get("content-type") ?? "").startsWith("image/")) fail("immagini", at(`immagine non caricabile ${src} → ${r.status}`));
+      }
+    }
 
     const placeholders = doc.querySelectorAll("[data-placeholder]").length;
     const bracket = /\[[^\]]{3,}\]/.test(doc.querySelector("main")?.text ?? "");
@@ -178,6 +190,16 @@ async function checkHtml(expected) {
       if (!back) fail("hreflang", `${url}: l'alternativa ${lang} (${target}) non è una pagina del sito`);
       else if (Object.values(back).indexOf(url) === -1) fail("hreflang", `${url} ↔ ${target}: non reciproci`);
       else count("coppie hreflang reciproche");
+    }
+  }
+
+  // Crediti completi: ogni immagine approvata compare nella pagina Crediti di ogni lingua con la sua fonte
+  for (const lang of LANGS) {
+    const credits = pages.get(pathFor(lang, "credits"));
+    for (const img of getImages().filter((i) => i.status === "approvata")) {
+      if (!credits) fail("crediti", `pagina Crediti ${lang} assente ma ci sono immagini approvate`);
+      else if (!credits.doc.querySelector(`a[href="${img.source}"]`)) fail("crediti", `${lang}: "${img.id}" non compare nella pagina Crediti`);
+      else count("crediti verificati");
     }
   }
 

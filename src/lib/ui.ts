@@ -29,6 +29,7 @@ export type UiStrings = {
   phoneLabel: string;
   officesLabel: string;
   previewNote: string;
+  creditsSource: string;
   demoProfile: string;
 };
 
@@ -49,6 +50,7 @@ export const UI: Record<Lang, UiStrings> = {
       people: "Persone",
       contact: "Contatti",
       privacy: "Informativa sulla privacy",
+      credits: "Crediti",
     },
     sectionsNav: "Sezioni della pagina",
     sections: { hero: "Apertura", firm: "Lo studio", expertise: "Competenze", people: "Persone", closing: "Contatti" },
@@ -69,6 +71,7 @@ export const UI: Record<Lang, UiStrings> = {
     officesLabel: "Sedi",
     previewNote: "Anteprima di lavoro: nomi, ruoli, testi e immagini sono esempi o segnaposto, non informazioni dello studio.",
     demoProfile: "Profilo di esempio: nome e ruolo sono dimostrativi.",
+    creditsSource: "Fonte",
   },
   en: {
     siteName: "Studio Avvocati Zappalà",
@@ -86,6 +89,7 @@ export const UI: Record<Lang, UiStrings> = {
       people: "People",
       contact: "Contact",
       privacy: "Privacy notice",
+      credits: "Credits",
     },
     sectionsNav: "Page sections",
     sections: { hero: "Introduction", firm: "The firm", expertise: "Expertise", people: "People", closing: "Contact" },
@@ -106,5 +110,6 @@ export const UI: Record<Lang, UiStrings> = {
     officesLabel: "Offices",
     previewNote: "Working preview: names, roles, texts and images are examples or placeholders, not information about the firm.",
     demoProfile: "Example profile: name and role are for demonstration only.",
+    creditsSource: "Source",
   },
 };

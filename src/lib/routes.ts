@@ -4,7 +4,7 @@ export const LANGS = ["it", "en"] as const;
 export type Lang = (typeof LANGS)[number];
 export const DEFAULT_LANG: Lang = "it";
 
-export const PAGE_KEYS = ["home", "firm", "expertise", "people", "contact", "privacy"] as const;
+export const PAGE_KEYS = ["home", "firm", "expertise", "people", "contact", "privacy", "credits"] as const;
 export type PageKey = (typeof PAGE_KEYS)[number];
 
 /** Voci di navigazione principale (PRD §4). Family office solo dopo conferma del servizio. */
@@ -17,6 +17,7 @@ const SEGMENTS: Record<PageKey, Record<Lang, string>> = {
   people: { it: "persone", en: "people" },
   contact: { it: "contatti", en: "contact" },
   privacy: { it: "privacy", en: "privacy" },
+  credits: { it: "crediti", en: "credits" },
 };
 
 export function isLang(value: string): value is Lang {

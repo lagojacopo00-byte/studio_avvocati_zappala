@@ -3,7 +3,7 @@
 //   node scripts/check-content.mjs --production  → in più: nessun segnaposto, immagini approvate, SITE_URL reale
 import fs from "node:fs";
 import path from "node:path";
-import { getAllPeople, getImages, getPage, getStudio, publishIssues } from "../src/lib/content.ts";
+import { getAllPeople, getImages, getPage, getSlotImage, getStudio, publishIssues } from "../src/lib/content.ts";
 import { LANGS, PAGE_KEYS } from "../src/lib/routes.ts";
 
 const production = process.argv.includes("--production");
@@ -38,11 +38,20 @@ if (errors.length === 0) {
   const images = getImages();
   dup(images.map((i) => i.id), "id immagine");
   for (const img of images) {
-    if (/\b(SA|NC|ND)\b/i.test(img.license)) fail(`images.json: licenza non ammessa per "${img.id}": ${img.license}`);
+    // NC e ND non sono ammesse su un sito professionale. CC BY-SA sì, ma solo con credito e pagina Crediti (approvazione caso per caso).
+    if (/\b(NC|ND)\b/i.test(img.license)) fail(`images.json: licenza non ammessa per "${img.id}": ${img.license}`);
     if (img.status === "approvata") {
+      if (/BY/i.test(img.license) && !img.credit) fail(`images.json: "${img.id}" (${img.license}) richiede il credito`);
+      if (!img.fileUrl) fail(`images.json: "${img.id}" approvata senza fileUrl (serve a npm run images)`);
       if (!fs.existsSync(path.join("public", "images", img.file))) fail(`images.json: file mancante public/images/${img.file}`);
       if (!img.alt.it || !img.alt.en) fail(`images.json: testo alternativo IT/EN mancante per "${img.id}"`);
     }
+  }
+  // Gli slot dell'interfaccia devono puntare a immagini che esistono nel registro
+  const slots = JSON.parse(fs.readFileSync(path.join("content", "slots.json"), "utf8"));
+  for (const [slot, id] of Object.entries(slots)) {
+    if (!images.some((i) => i.id === id)) fail(`slots.json: lo slot "${slot}" punta a "${id}", assente dal registro immagini`);
+    else if (!getSlotImage(slot)) console.warn(`  ! slot "${slot}" → "${id}" non ancora approvata: mostra il segnaposto`);
   }
   for (const p of people) {
     if (p.meta.photo && !images.some((i) => i.id === p.meta.photo.imageId)) {

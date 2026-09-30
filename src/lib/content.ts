@@ -7,6 +7,7 @@ import type { Lang, PageKey } from "./routes.ts";
 import {
   ImageRegisterSchema,
   PAGE_SCHEMAS,
+  SlotsSchema,
   PersonLangSchema,
   PersonMetaSchema,
   StudioSchema,
@@ -35,6 +36,7 @@ export const PAGE_FILES: Record<PageKey, string> = {
   people: "people",
   contact: "contact",
   privacy: "privacy",
+  credits: "credits",
 };
 
 export type PageContent<K extends PageKey> = z.infer<(typeof PAGE_SCHEMAS)[K]>;
@@ -53,6 +55,12 @@ export function getImages(): ImageRecord[] {
 
 export function getApprovedImage(id: string): ImageRecord | undefined {
   return getImages().find((img) => img.id === id && img.status === "approvata");
+}
+
+/** Immagine approvata assegnata a uno slot dell'interfaccia; undefined = mostra il segnaposto. */
+export function getSlotImage(slot: string): ImageRecord | undefined {
+  const id = readJson("slots.json", SlotsSchema)[slot];
+  return id ? getApprovedImage(id) : undefined;
 }
 
 export type Person = { meta: PersonMeta; lang: Record<Lang, PersonLang> };

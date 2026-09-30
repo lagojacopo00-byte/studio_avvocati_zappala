@@ -14,7 +14,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
         <p className="site-footer__name">{studio.name}</p>
         <nav aria-label={ui.footerNav}>
           <ul>
-            {[...NAV_KEYS, "privacy" as const].map((key) => (
+            {[...NAV_KEYS, "privacy" as const, "credits" as const].map((key) => (
               <li key={key}>
                 <Link href={pathFor(lang, key)}>{ui.nav[key]}</Link>
               </li>

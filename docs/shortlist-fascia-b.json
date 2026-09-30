@@ -88,28 +88,6 @@
     "status": "candidata"
   },
   {
-    "id": "palazzo-barberini-scala",
-    "file": "palazzo-barberini-scala.jpg",
-    "subject": "Palazzo Barberini: scala elicoidale (Borromini)",
-    "author": "Livioandronico2013",
-    "source": "https://commons.wikimedia.org/wiki/File:Palazzo_Barberini_(Rome)_-_Borromini%27s_staircase.jpg",
-    "fileUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Palazzo_Barberini_%28Rome%29_-_Borromini%27s_staircase.jpg",
-    "license": "CC BY-SA 4.0",
-    "credit": "Livioandronico2013 / Wikimedia Commons / CC BY-SA 4.0",
-    "verifiedOn": "2026-09-29",
-    "width": 4936,
-    "height": 3856,
-    "alt": {
-      "it": "Scala elicoidale di Palazzo Barberini vista dal basso",
-      "en": "Helical staircase of Palazzo Barberini seen from below"
-    },
-    "focal": [
-      0.5,
-      0.5
-    ],
-    "status": "candidata"
-  },
-  {
     "id": "palazzo-barberini-finestra",
     "file": "palazzo-barberini-finestra.jpg",
     "subject": "Palazzo Barberini: finestra ad arco",
