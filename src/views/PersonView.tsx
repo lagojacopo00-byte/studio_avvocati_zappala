@@ -22,6 +22,7 @@ export function PersonView({ lang, person }: { lang: Lang; person: Person }) {
         <div>
           <h1 className="page-title">{name}</h1>
           <p className={`person-page__role${role.placeholder ? " is-placeholder" : ""}`}>{role.text}</p>
+          {person.meta.demo && <p className="demo-note">{ui.demoProfile}</p>}
           <div className="prose">
             {loc.bio.length > 0 ? loc.bio.map((p) => <p key={p}>{p}</p>) : <p className="is-placeholder">{ui.bioTbd}</p>}
           </div>

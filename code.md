@@ -50,7 +50,7 @@ La radice può reindirizzare in modo stabile alla lingua principale concordata. 
 
 Stati editoriali proposti: placeholder, bozza, revisionato, pubblicabile. L'ambiente pubblico deve includere solo contenuti pubblicabili. I segnaposto non sono una fonte di fatti o metadati definitivi.
 
-Per Andrea Zappalà usare il nome confermato; non attribuire il ruolo di fondatore, partner o titolare senza riscontro. Per gli altri usare etichette di lavoro, non identità inventate. Non fissare un numero di persone prima della consegna dell'organico.
+Per Andrea Zappalà usare il nome confermato; non attribuire il ruolo di fondatore, partner o titolare senza riscontro. Per gli altri usare etichette di lavoro, non identità inventate. **Eccezione v0.3 (solo anteprima):** persone di esempio con `demo: true`, mai pubblicabili (`publishIssues` e `build:production` le bloccano); vedi PRD §1. Non fissare un numero di persone prima della consegna dell'organico.
 
 ## 5. Design system proposto
 

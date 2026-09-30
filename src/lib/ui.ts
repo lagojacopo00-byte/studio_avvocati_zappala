@@ -28,6 +28,8 @@ export type UiStrings = {
   emailLabel: string;
   phoneLabel: string;
   officesLabel: string;
+  previewNote: string;
+  demoProfile: string;
 };
 
 export const UI: Record<Lang, UiStrings> = {
@@ -65,6 +67,8 @@ export const UI: Record<Lang, UiStrings> = {
     emailLabel: "E-mail",
     phoneLabel: "Telefono",
     officesLabel: "Sedi",
+    previewNote: "Anteprima di lavoro: nomi, ruoli, testi e immagini sono esempi o segnaposto, non informazioni dello studio.",
+    demoProfile: "Profilo di esempio: nome e ruolo sono dimostrativi.",
   },
   en: {
     siteName: "Studio Avvocati Zappalà",
@@ -100,5 +104,7 @@ export const UI: Record<Lang, UiStrings> = {
     emailLabel: "Email",
     phoneLabel: "Phone",
     officesLabel: "Offices",
+    previewNote: "Working preview: names, roles, texts and images are examples or placeholders, not information about the firm.",
+    demoProfile: "Example profile: name and role are for demonstration only.",
   },
 };

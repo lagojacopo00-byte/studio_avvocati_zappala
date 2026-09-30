@@ -23,6 +23,8 @@ export const PersonMetaSchema = z.object({
   slug: SlugSchema,
   fullName: Text,
   nameConfirmed: z.boolean(),
+  /** true = nome e ruolo di ESEMPIO per valutare il design in anteprima; bloccati in produzione */
+  demo: z.boolean().default(false),
   order: z.number().int(),
   /** imageId del registro immagini; null finché non arriva la foto autorizzata */
   photo: z.object({ imageId: Text, focal: Focal }).nullable(),

@@ -253,6 +253,7 @@ a { color: inherit; }
   .person-page .portrait { position: sticky; top: calc(var(--header-h) + 2rem); }
 }
 .person-page__role { font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mist); margin-bottom: 2rem; }
+.demo-note { font-size: 0.9rem; color: var(--mist); font-style: italic; margin-bottom: 1.5rem; }
 .meta-list { display: grid; gap: 0.25rem; }
 .meta-list dt { font-weight: 600; margin-top: 1rem; }
 .meta-list dd { margin: 0; }

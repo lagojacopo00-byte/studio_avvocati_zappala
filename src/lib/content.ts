@@ -114,6 +114,7 @@ export function publishIssues(): string[] {
     }
   }
   for (const p of getAllPeople()) {
+    if (p.meta.demo) issues.push(`people/${p.meta.slug}: nome e ruolo di ESEMPIO (demo) — da sostituire con i dati reali`);
     if (p.meta.status !== "pubblicabile") issues.push(`people/${p.meta.slug}/person.json: stato "${p.meta.status}"`);
     for (const l of LANGS) {
       if (p.lang[l].status !== "pubblicabile") issues.push(`people/${p.meta.slug}/${l}.json: stato "${p.lang[l].status}"`);

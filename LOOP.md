@@ -53,7 +53,7 @@ Ogni comando esce con **codice 0 se tutto è a posto e 1 se qualcosa fallisce**,
 | Controlli | `scripts/check-content.mjs`, `scripts/verify.mjs` |
 
 ### Aggiungere una persona
-1. Creare `content/people/<slug>/` con `person.json`, `it.json`, `en.json` (copiare da `andrea-zappala`).
+1. Creare `content/people/<slug>/` con `person.json`, `it.json`, `en.json` (copiare da `andrea-zappala`). Le persone di esempio hanno `"demo": true` (nome e ruolo dimostrativi, solo anteprima): per una persona reale impostare `"demo": false`, `"nameConfirmed": true` e stato `pubblicabile` quando i dati sono verificati.
 2. Foto: aggiungere l'immagine a `public/images/`, registrarla in `content/images.json` (stato `approvata` solo se autorizzata) e impostare `photo` in `person.json`.
 3. `npm run check`.
 

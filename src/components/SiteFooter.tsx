@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getStudio } from "@/lib/content";
+import { IS_PRODUCTION } from "@/lib/env";
 import { NAV_KEYS, pathFor } from "@/lib/routes";
 import type { Lang } from "@/lib/routes";
 import { UI } from "@/lib/ui";
@@ -37,6 +38,7 @@ export function SiteFooter({ lang }: { lang: Lang }) {
           </address>
         )}
         <p className="site-footer__legal">© {studio.name}</p>
+        {!IS_PRODUCTION && <p className="site-footer__legal">{ui.previewNote}</p>}
       </div>
     </footer>
   );

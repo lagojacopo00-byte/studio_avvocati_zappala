@@ -7,6 +7,8 @@ Stato: brief aggiornato; realizzazione avviata in anteprima con contenuti segnap
 
 **Aggiornamento v0.3.** Il mandato della v0.2 (produrre solo PRD e `code.md`) è superato: il 29 settembre 2026 l'utente ha chiesto il piano di realizzazione (`PIANO.md`) e ha avviato lo sviluppo del sito in **anteprima**, con controlli automatici (`LOOP.md`). Restano fuori: pubblicazione, creazione del logo, uso di materiali non autorizzati. Le fotografie di architettura possono essere **selezionate da archivi a licenza libera** (Wikimedia Commons, Unsplash, Pexels) e scaricate **solo dopo l'approvazione dell'utente** della short list; ogni immagine entra nel registro con autore, fonte, licenza e credito. Il progetto è distinto da Intreia e non ne utilizza identità, materiali o configurazione.
 
+**Eccezione v0.3 sui nomi (30 settembre 2026).** Il PRD vietava nomi fittizi. Su richiesta dell'utente, **solo nell'anteprima** e solo per valutare il design, la griglia del team usa persone di **esempio** (campo `demo` nei contenuti, nome e ruolo dimostrativi, etichettati nel footer e nei profili). Non sono informazioni dello studio, non compaiono mai in produzione (la build di produzione fallisce finché ne resta una) e vanno sostituite con l'organico reale. Andrea Zappalà resta l'unico nominativo confermato.
+
 Versione 0.2 (superata): produrre esclusivamente questo PRD e `code.md`, senza realizzazione, anteprima, acquisizione di immagini, creazione del logo o pubblicazione.
 
 ### Decisioni confermate
